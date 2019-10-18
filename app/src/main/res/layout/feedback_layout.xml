@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_layout" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/ed_content"
+            android:layout_width="345dp"
+            android:layout_height="250dp"
+            android:background="@drawable/white_shape_bg"
+            android:gravity="top"
+            android:hint="在这里留下您的宝贵意见..."
+            android:maxLength="200"
+            android:padding="10dp"
+            android:textSize="13sp" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/" />
+
+            <TextView
+                android:id="@+id/tv_sum_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_subimt"
+        style="@style/btn_style"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="50dp"
+        android:text="提交" />
+</LinearLayout>

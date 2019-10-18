@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp">
+
+            <com.ysxsoft.freshmall.widget.banner.Banner
+                android:id="@+id/vp_banner"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                app:indicator_drawable_selected="@color/btn_color"
+                app:indicator_drawable_unselected="@color/gray" />
+
+            <include
+                android:id="@+id/ll_title"
+                layout="@layout/o2o_transparent_title_layout" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_mall_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="王婆大虾"
+                        android:textSize="15sp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:drawableLeft="@mipmap/ing_o2o_location"
+                        android:text="5km"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="评分"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_pingfen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.5"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="月销"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_yuexiao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="40005"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="访问量"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_fangwen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="40005"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_gengxin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="本月更新"
+                            android:textColor="@color/hint_text_color"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_gengxin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="66"
+                            android:textColor="@color/hint_text_color"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <com.ysxsoft.freshmall.widget.CircleImageView
+                android:id="@+id/img_tupian"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/img_normal_head" />
+        </FrameLayout>
+
+        <com.ysxsoft.freshmall.widget.slidingtablayout.SlidingTabLayout
+            android:id="@+id/stl_tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:paddingTop="10dp"
+            tl:tl_indicator_color="#FC4F4F"
+            tl:tl_indicator_height="1.5dp"
+            tl:tl_indicator_width_equal_title="true"
+            tl:tl_tab_padding="45dp"
+            tl:tl_tab_space_equal="true"
+            tl:tl_textSelectColor="#FC4F4F"
+            tl:tl_textUnselectColor="#000000"
+            tl:tl_underline_color="#1A000000"
+            tl:tl_underline_height="1dp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_content"
+            android:layout_width="1dp"
+            android:layout_height="1dp" />
+
+
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

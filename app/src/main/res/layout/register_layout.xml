@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/img_login_bg"
+    android:orientation="vertical">
+
+    <com.ysxsoft.freshmall.widget.CircleImageView
+        android:id="@+id/img_logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/img_normal_head" />
+
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_shape"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/img_user" />
+
+        <EditText
+            android:id="@+id/ed_user"
+            style="@style/edittext_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="请输入您的账户"
+            android:inputType="number"
+            android:maxLength="11"
+            android:textColorHint="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_shape"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/img_identifying_code" />
+
+        <EditText
+            android:id="@+id/ed_identifying_code"
+            style="@style/edittext_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:hint="请输入您的验证码"
+            android:inputType="number"
+            android:textColorHint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_identifying_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/white_shape_bg"
+            android:padding="5dp"
+            android:text="@string/get_identifying_code"
+            android:textColor="@color/btn_color"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_shape"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/img_pwd" />
+
+        <EditText
+            android:id="@+id/ed_pwd"
+            style="@style/edittext_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:digits="@string/pwd_type"
+            android:hint="请输入您的密码"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_shape"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/img_pwd" />
+
+        <EditText
+            android:id="@+id/ed_check_pwd"
+            style="@style/edittext_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:inputType="textPassword"
+            android:digits="@string/pwd_type"
+            android:hint="请确认您的密码"
+            android:textColorHint="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_shape"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/img_invitate_code" />
+
+        <EditText
+            android:id="@+id/ed_invitation_code"
+            style="@style/edittext_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="请输入您的邀请码"
+            android:digits="@string/pwd_type"
+            android:textColorHint="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_shape"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/img_part" />
+
+        <TextView
+            android:id="@+id/tv_part"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:hint="请选择您的角色"
+            android:inputType="number"
+            android:drawableRight="@mipmap/img_down_arrow"
+            android:textColorHint="@color/white" />
+
+        <ImageView
+            android:id="@+id/img_select_part"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/img_down_arrow"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/white_shape_bg"
+        android:gravity="center"
+        android:text="@string/register"
+        android:textColor="@color/btn_color"
+        android:textSize="16sp" />
+
+    <FrameLayout
+        android:layout_width="276dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/tv_immediately_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="已有账号？立即登录"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+    </FrameLayout>
+
+</LinearLayout>

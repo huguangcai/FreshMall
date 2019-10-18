@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_color"
+        android:layout_width="55dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/detail_item_no"
+        android:gravity="center"
+        android:textSize="12sp"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMaxTextSize="12sp"
+        app:autoSizeMinTextSize="10sp"
+        android:text="白色" />
+
+</LinearLayout>
