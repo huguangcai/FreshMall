@@ -81,6 +81,43 @@ public class GoodDetailBean {
         private String types;
         private String typeid;
         private String px;
+        private String zliang;
+        private String chandi;
+        private String chucun;
+
+        public String getZliang() {
+            return zliang;
+        }
+
+        public void setZliang(String zliang) {
+            this.zliang = zliang;
+        }
+
+        public String getChandi() {
+            return chandi;
+        }
+
+        public void setChandi(String chandi) {
+            this.chandi = chandi;
+        }
+
+        public String getChucun() {
+            return chucun;
+        }
+
+        public void setChucun(String chucun) {
+            this.chucun = chucun;
+        }
+
+        public String getBaozqtime() {
+            return baozqtime;
+        }
+
+        public void setBaozqtime(String baozqtime) {
+            this.baozqtime = baozqtime;
+        }
+
+        private String baozqtime;
         private MsmsgBean msmsg;
         private List<String> piclist;
         private List<String> guige;

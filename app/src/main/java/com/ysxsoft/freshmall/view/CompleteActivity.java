@@ -35,7 +35,7 @@ import rx.schedulers.Schedulers;
 
 public class CompleteActivity extends BaseActivity implements View.OnClickListener {
 
-    private TextView tv_wait_fahuo, tv_wait_time, tv_name, tv_phone_num, tv_address, tv_content, tv_color,
+    private TextView tv_wait_fahuo, tv_wait_time, tv_name, tv_phone_num, tv_address, tv_content, tv_color, tv_yfei,
             tv_size, tv_price, tv_goods_money, tv_yunfei, tv_order_sum_money, tv_apply_time,
             tv_refund_number, tv_pay_type, tv_no_address;
     private ImageView img_tupian;
@@ -74,6 +74,7 @@ public class CompleteActivity extends BaseActivity implements View.OnClickListen
                     public void onCompleted() {
                         if (orderDetailBean.getCode() == 0) {
                             data = orderDetailBean.getData();
+//                            tv_yfei.setText(data.getYfei());
                             ApplyRefundMoneyAdapter adapter = new ApplyRefundMoneyAdapter(mContext, data.getGoods());
                             recyclerdata.setAdapter(adapter);
                             totalPrice = 0.00;
@@ -152,6 +153,7 @@ public class CompleteActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView() {
+        tv_yfei = getViewById(R.id.tv_yfei);
         tv_wait_fahuo = getViewById(R.id.tv_wait_fahuo);
         tv_wait_time = getViewById(R.id.tv_wait_time);
         tv_name = getViewById(R.id.tv_name);

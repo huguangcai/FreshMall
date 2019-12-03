@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:layout_marginTop="10dp"
-            android:text="ins韩版简约手表女小清新文艺女生气质复古原宿学院风" />
+            android:text="" />
 
         <LinearLayout
             android:layout_width="match_parent"

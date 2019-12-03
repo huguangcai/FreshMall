@@ -73,6 +73,16 @@ public class OrderDetailBean {
         private String pay_time;
         private String end_time;
         private String order_num;
+
+        public String getYfei() {
+            return yfei;
+        }
+
+        public void setYfei(String yfei) {
+            this.yfei = yfei;
+        }
+
+        private String yfei;
         private String pay_type;
         private String order_status;
         private String send_wuliu;

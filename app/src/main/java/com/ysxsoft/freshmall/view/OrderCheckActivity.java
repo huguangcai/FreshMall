@@ -23,6 +23,7 @@ import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.adapter.OrderCheckAdapter;
 import com.ysxsoft.freshmall.dialog.O2OPayDialog;
 import com.ysxsoft.freshmall.impservice.ImpService;
+import com.ysxsoft.freshmall.modle.CheckMoneyBean;
 import com.ysxsoft.freshmall.modle.CommonBean;
 import com.ysxsoft.freshmall.modle.GetAddressListBean;
 import com.ysxsoft.freshmall.modle.PackageDetailBean;
@@ -48,7 +49,7 @@ import rx.schedulers.Schedulers;
 
 public class OrderCheckActivity extends BaseActivity implements View.OnClickListener {
 
-    private TextView tv_name, tv_phone_num, tv_address, tv_minus,
+    private TextView tv_name, tv_phone_num, tv_address, tv_minus, tv_youMoney,tv_free_shipping,
             tv_num, tv_add, tv_sum_num, tv_money, tv_pay, tv_no_address;
     private EditText ed_mark;
     private LinearLayout ll_have_address;
@@ -61,6 +62,7 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
     private String shopCardId;
     private TextView tv_check_pay;
     private IWXAPI api;
+    private DecimalFormat decimalFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +118,8 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
+        tv_free_shipping = getViewById(R.id.tv_free_shipping);
+        tv_youMoney = getViewById(R.id.tv_youMoney);
         tv_name = getViewById(R.id.tv_name);
         tv_phone_num = getViewById(R.id.tv_phone_num);
         tv_address = getViewById(R.id.tv_address);
@@ -132,14 +136,15 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
 
 
         tv_sum_num.setText(String.valueOf(detailBean.getDataList().size()));
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        tv_money.setText(decimalFormat.format(Double.valueOf(detailBean.getSum())));
+        decimalFormat = new DecimalFormat("0.00");
+//        tv_money.setText(decimalFormat.format(Double.valueOf(detailBean.getSum())));
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(manager);
         OrderCheckAdapter adapter = new OrderCheckAdapter(mContext, detailBean.getDataList());
         recyclerView.setAdapter(adapter);
 
     }
+
 
     private void initListener() {
         tv_minus.setOnClickListener(this);
@@ -446,6 +451,35 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
         RequestAddressData();
+        checkMoney();
+    }
+
+    private void checkMoney() {
+        NetWork.getService(ImpService.class)
+                .CheckMoney(String.valueOf(decimalFormat.format(Double.valueOf(detailBean.getSum()))))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CheckMoneyBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(CheckMoneyBean checkMoneyBean) {
+                        if (checkMoneyBean.getCode() == 0) {
+                            tv_money.setText(checkMoneyBean.getData().getZcount());
+                            tv_youMoney.setText("¥"+checkMoneyBean.getData().getYfei());
+                            tv_free_shipping.setText("(满"+checkMoneyBean.getData().getMbyou()+"包邮)");
+                        }
+                    }
+                });
+
     }
 
     /******************************************************************************/

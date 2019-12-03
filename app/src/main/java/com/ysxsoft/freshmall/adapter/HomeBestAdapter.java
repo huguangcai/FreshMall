@@ -38,6 +38,7 @@ public class HomeBestAdapter extends RecyclerView.Adapter<HomeBestAdapter.HomeBe
     public void onBindViewHolder(@NonNull HomeBestHolder homeBestHolder, final int i) {
         HomeBestBean.DataBean dataBean = data.get(i);
         ImageLoadUtil.GlideGoodsImageLoad(context,dataBean.getPic(),homeBestHolder.img_tupian);
+        homeBestHolder.tv_desc.setText(dataBean.getSpname());
         homeBestHolder.tv_vip_price.setText("¥"+dataBean.getVipjiage());
         homeBestHolder.tv_old_price.setText("¥"+dataBean.getJiage());
         homeBestHolder.tv_old_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);

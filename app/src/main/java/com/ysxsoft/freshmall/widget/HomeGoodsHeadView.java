@@ -32,6 +32,7 @@ import com.ysxsoft.freshmall.widget.banner.Banner;
 
 import java.util.List;
 
+import me.jessyan.autosize.utils.LogUtils;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -94,7 +95,7 @@ public class HomeGoodsHeadView extends AbsLinearLayout {
 
                     @Override
                     public void onNext(HomeBestBean homeBestBean) {
-
+                        LogUtils.e(homeBestBean.toString());
                         this.homeBestBean = homeBestBean;
                     }
                 });

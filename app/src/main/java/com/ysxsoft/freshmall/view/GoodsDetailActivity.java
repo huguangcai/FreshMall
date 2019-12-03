@@ -69,7 +69,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     private GoodDetailBean.DataBean data;
     private MyRecyclerView rv_tupian;
     private String uid;
-    private TextView tv_goods_num, tv_time_desc;
+    private TextView tv_goods_num, tv_time_desc,tv_weight,tv_producing_area,tv_method,tv_use_date;
     private String goodsId, seckill;
     private LinearLayout ll_have_evaluate;
     private ArrayList<PackageDetailBean.DetailData> detailBeans = new ArrayList<>();
@@ -137,6 +137,12 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                     public void onCompleted() {
                         if (goodDetailBean.getCode() == 0) {
                             data = goodDetailBean.getData();
+
+                            tv_weight.setText(data.getZliang());
+                            tv_producing_area.setText(data.getChandi());
+                            tv_method.setText(data.getChucun());
+                            tv_use_date.setText(data.getBaozqtime());
+
                             vp_banner.setImages(data.getPiclist())
                                     .setImageLoader(new GlideImageLoader())
                                     .setOnBannerListener(GoodsDetailActivity.this)
@@ -214,6 +220,12 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         tv_end_time = getViewById(R.id.tv_end_time);
         tv_number = getViewById(R.id.tv_number);
         tv_time_desc = getViewById(R.id.tv_time_desc);
+
+        tv_weight = getViewById(R.id.tv_weight);
+        tv_producing_area = getViewById(R.id.tv_producing_area);
+        tv_method = getViewById(R.id.tv_method);
+        tv_use_date = getViewById(R.id.tv_use_date);
+
         if ("seckill".equals(seckill)) {
             ll_Is_show.setVisibility(View.VISIBLE);
         } else {

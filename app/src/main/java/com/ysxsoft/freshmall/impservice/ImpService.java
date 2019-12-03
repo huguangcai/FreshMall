@@ -2,6 +2,7 @@ package com.ysxsoft.freshmall.impservice;
 
 import com.ysxsoft.freshmall.modle.AboutMyBean;
 import com.ysxsoft.freshmall.modle.AliPayBean;
+import com.ysxsoft.freshmall.modle.CheckMoneyBean;
 import com.ysxsoft.freshmall.modle.ColleteListBean;
 import com.ysxsoft.freshmall.modle.CommonBean;
 import com.ysxsoft.freshmall.modle.CustomerPhoneBean;
@@ -524,6 +525,11 @@ public interface ImpService {
     @POST("pays/userwxvipzf")
     Observable<WxPayBean> WxChatVip(@Field("uid") String uid,
                                     @Field("type") String type);
+
+
+    @FormUrlEncoded
+    @POST("order/youfei")
+    Observable<CheckMoneyBean> CheckMoney(@Field("jiage") String jiage);
 
 
 }

@@ -61,27 +61,25 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
                     android:gravity="center_vertical|right"
                     android:text="剩余"
                     android:textColor="@color/white"
-                    android:visibility="gone"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_number"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
                     android:gravity="center_vertical"
                     android:text="155"
-                    android:layout_marginRight="10dp"
                     android:textColor="@color/white"
-                    android:visibility="gone"
-                    android:textSize="12sp" />
-
-
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
 
             </LinearLayout>
@@ -110,7 +108,7 @@
                         android:id="@+id/tv_current_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="666.00"
+                        tools:text="666.00"
                         android:textColor="@color/btn_color"
                         android:textSize="18sp" />
 
@@ -119,7 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="¥666.00"
+                        tools:text="¥666.00"
                         android:textColor="@color/hint_text_color" />
 
                     <TextView
@@ -137,7 +135,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginRight="15dp"
                         android:gravity="center_vertical|right"
-                        android:text="226"
+                        tools:text="226"
                         android:textColor="@color/hint_text_color"
                         android:textSize="12sp" />
 
@@ -152,7 +150,7 @@
                     android:layout_marginRight="15dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="女鞋单鞋2018新款翻毛皮春秋女鞋百搭简约尖头显瘦弹
+                    tools:text="女鞋单鞋2018新款翻毛皮春秋女鞋百搭简约尖头显瘦弹
 力中跟粗跟单鞋女" />
 
 
@@ -219,6 +217,127 @@
                         android:src="@mipmap/img_right_arrow" />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="重量："
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="800g"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="产地："
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_producing_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="河南郑州"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="储存方法："
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_method"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="避光保存"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="保质期："
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_use_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="12个月"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -325,7 +444,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
-                            android:text="质量很好，非常喜欢，还会再来的！" />
+                            tools:text="质量很好，非常喜欢，还会再来的！" />
 
                         <com.ysxsoft.freshmall.widget.MyRecyclerView
                             android:id="@+id/rv_tupian"

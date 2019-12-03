@@ -102,5 +102,26 @@ public class HomeBestBean {
         public void setPic(String pic) {
             this.pic = pic;
         }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "id='" + id + '\'' +
+                    ", spname='" + spname + '\'' +
+                    ", jiage='" + jiage + '\'' +
+                    ", vipjiage='" + vipjiage + '\'' +
+                    ", pic='" + pic + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "HomeBestBean{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", pages=" + pages +
+                ", data=" + data +
+                '}';
     }
 }
