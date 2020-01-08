@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="horizontal">
 
@@ -14,11 +15,12 @@
         android:button="@drawable/shop_car_selector"
         android:gravity="center_vertical" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/img_goods_tupian"
         android:layout_width="80dp"
         android:layout_height="86dp"
         android:layout_margin="5dp"
+        app:riv_corner_radius="5dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
 

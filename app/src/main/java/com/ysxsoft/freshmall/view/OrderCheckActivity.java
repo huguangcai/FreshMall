@@ -35,6 +35,7 @@ import com.ysxsoft.freshmall.utils.NetWork;
 import com.ysxsoft.freshmall.utils.SpUtils;
 import com.ysxsoft.freshmall.utils.alipay.PayResult;
 import com.ysxsoft.freshmall.widget.MyRecyclerView;
+import com.ysxsoft.freshmall.widget.ReceiptDialog;
 
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -49,8 +50,8 @@ import rx.schedulers.Schedulers;
 
 public class OrderCheckActivity extends BaseActivity implements View.OnClickListener {
 
-    private TextView tv_name, tv_phone_num, tv_address, tv_minus, tv_youMoney,tv_free_shipping,
-            tv_num, tv_add, tv_sum_num, tv_money, tv_pay, tv_no_address;
+    private TextView tv_name, tv_phone_num, tv_address, tv_minus, tv_youMoney, tv_free_shipping,
+            tv_num, tv_add, tv_sum_num, tv_money, tv_pay, tv_no_address, tvReceipt;
     private EditText ed_mark;
     private LinearLayout ll_have_address;
     private String uid;
@@ -63,6 +64,14 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
     private TextView tv_check_pay;
     private IWXAPI api;
     private DecimalFormat decimalFormat;
+
+
+    private String fptypes;
+    private String dwname;
+    private String nsrsbh;
+    private String sprphone;
+    private String spryx;
+    private String fpneir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +127,7 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
+        tvReceipt = getViewById(R.id.tvReceipt);
         tv_free_shipping = getViewById(R.id.tv_free_shipping);
         tv_youMoney = getViewById(R.id.tv_youMoney);
         tv_name = getViewById(R.id.tv_name);
@@ -152,6 +162,7 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
         tv_pay.setOnClickListener(this);
         tv_no_address.setOnClickListener(this);
         ll_have_address.setOnClickListener(this);
+        tvReceipt.setOnClickListener(this);
     }
 
 
@@ -188,6 +199,12 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
                     showToastMessage("地址不能为空");
                     return;
                 }
+
+                if (TextUtils.isEmpty(sprphone)) {
+                    showToastMessage("发票不能为空");
+                    return;
+                }
+
                 final O2OPayDialog dialog = new O2OPayDialog(mContext);
                 LinearLayout ll_alipay = dialog.findViewById(R.id.ll_alipay);
                 final ImageView img_alipay = dialog.findViewById(R.id.img_alipay);
@@ -282,78 +299,164 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
             case R.id.tv_no_address:
                 startActivity(GetGoodsAddressActivity.class);
                 break;
+
+            case R.id.tvReceipt:
+                ReceiptDialog receiptDialog = new ReceiptDialog(mContext);
+                receiptDialog.setOnReceiptDialogListener(new ReceiptDialog.OnReceiptDialogListener() {
+                    @Override
+                    public void sure(String receiptType, String UnitName, String NSNum, String phone, String email, String receiptContent) {
+                        fptypes = receiptType;
+                        dwname = UnitName;
+                        nsrsbh = NSNum;
+                        sprphone = phone;
+                        spryx = email;
+                        fpneir = receiptContent;
+                    }
+                });
+                receiptDialog.show();
+                break;
+
         }
     }
 
     private void WxChatPay(String s, String json1, String shopCardId) {
         final CustomDialog wxPay = new CustomDialog(mContext, "获取订单中...");
         wxPay.show();
-        NetWork.getService(ImpService.class)
-                .WxChatPay(SpUtils.getSp(mContext, "uid"), s, json1, shopCardId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<WxPayBean>() {
-                    @Override
-                    public void onCompleted() {
+        if (TextUtils.equals(fptypes, "1")) {
+            NetWork.getService(ImpService.class)
+                    .WxChatPay1(SpUtils.getSp(mContext, "uid"), s, json1, shopCardId, fptypes, sprphone, spryx, fpneir)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<WxPayBean>() {
+                        @Override
+                        public void onCompleted() {
 
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        showToastMessage(e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(WxPayBean wxPayBean) {
-                        if ("0".equals(wxPayBean.getCode())) {
-                            PayReq req = new PayReq();
-                            req.appId = wxPayBean.getData().getAppid();
-                            req.partnerId = wxPayBean.getData().getPartnerid();
-                            req.prepayId = wxPayBean.getData().getPrepayid();
-                            req.nonceStr = wxPayBean.getData().getNoncestr();
-                            req.timeStamp = String.valueOf(wxPayBean.getData().getTimestamp());
-                            req.packageValue = wxPayBean.getData().getPackageX();
-                            req.sign = wxPayBean.getData().getSign();
-                            req.extData = "app data"; // optional
-//                            showToastMessage("正常调起支付");
-                            // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                            api.sendReq(req);
-                            wxPay.dismiss();
-                            Intent intentId = new Intent(mContext, WaitFaHouActivity.class);
-                            startActivity(intentId);
                         }
-                    }
-                });
+
+                        @Override
+                        public void onError(Throwable e) {
+                            showToastMessage(e.getMessage());
+                        }
+
+                        @Override
+                        public void onNext(WxPayBean wxPayBean) {
+                            if ("0".equals(wxPayBean.getCode())) {
+                                PayReq req = new PayReq();
+                                req.appId = wxPayBean.getData().getAppid();
+                                req.partnerId = wxPayBean.getData().getPartnerid();
+                                req.prepayId = wxPayBean.getData().getPrepayid();
+                                req.nonceStr = wxPayBean.getData().getNoncestr();
+                                req.timeStamp = String.valueOf(wxPayBean.getData().getTimestamp());
+                                req.packageValue = wxPayBean.getData().getPackageX();
+                                req.sign = wxPayBean.getData().getSign();
+                                req.extData = "app data"; // optional
+//                            showToastMessage("正常调起支付");
+                                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                                api.sendReq(req);
+                                wxPay.dismiss();
+                                Intent intentId = new Intent(mContext, WaitFaHouActivity.class);
+                                startActivity(intentId);
+                            }
+                        }
+                    });
+        } else {
+            NetWork.getService(ImpService.class)
+                    .WxChatPay(SpUtils.getSp(mContext, "uid"), s, json1, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<WxPayBean>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            showToastMessage(e.getMessage());
+                        }
+
+                        @Override
+                        public void onNext(WxPayBean wxPayBean) {
+                            if ("0".equals(wxPayBean.getCode())) {
+                                PayReq req = new PayReq();
+                                req.appId = wxPayBean.getData().getAppid();
+                                req.partnerId = wxPayBean.getData().getPartnerid();
+                                req.prepayId = wxPayBean.getData().getPrepayid();
+                                req.nonceStr = wxPayBean.getData().getNoncestr();
+                                req.timeStamp = String.valueOf(wxPayBean.getData().getTimestamp());
+                                req.packageValue = wxPayBean.getData().getPackageX();
+                                req.sign = wxPayBean.getData().getSign();
+                                req.extData = "app data"; // optional
+//                            showToastMessage("正常调起支付");
+                                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                                api.sendReq(req);
+                                wxPay.dismiss();
+                                Intent intentId = new Intent(mContext, WaitFaHouActivity.class);
+                                startActivity(intentId);
+                            }
+                        }
+                    });
+        }
 
     }
 
     private void PayData(String addressId, String json, String shopCardId) {
-        NetWork.getService(ImpService.class)
-                .BalanceData(SpUtils.getSp(mContext, "uid"), addressId, json, shopCardId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<CommonBean>() {
-                    private CommonBean commonBean;
+        if (TextUtils.equals(fptypes, "1")) {
+            NetWork.getService(ImpService.class)
+                    .BalanceData1(SpUtils.getSp(mContext, "uid"), addressId, json, shopCardId, fptypes, sprphone, spryx, fpneir)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<CommonBean>() {
+                        private CommonBean commonBean;
 
-                    @Override
-                    public void onCompleted() {
-                        showToastMessage(commonBean.getMsg());
-                        if (commonBean.getCode() == 0) {
-                            finish();
+                        @Override
+                        public void onCompleted() {
+                            showToastMessage(commonBean.getMsg());
+                            if (commonBean.getCode() == 0) {
+                                finish();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
+                        @Override
+                        public void onError(Throwable e) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onNext(CommonBean commonBean) {
+                        @Override
+                        public void onNext(CommonBean commonBean) {
 
-                        this.commonBean = commonBean;
-                    }
-                });
+                            this.commonBean = commonBean;
+                        }
+                    });
+        } else {
+
+            NetWork.getService(ImpService.class)
+                    .BalanceData(SpUtils.getSp(mContext, "uid"), addressId, json, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<CommonBean>() {
+                        private CommonBean commonBean;
+
+                        @Override
+                        public void onCompleted() {
+                            showToastMessage(commonBean.getMsg());
+                            if (commonBean.getCode() == 0) {
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onNext(CommonBean commonBean) {
+
+                            this.commonBean = commonBean;
+                        }
+                    });
+        }
 
     }
     /*********************************支付宝支付***************************************/
@@ -374,30 +477,58 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
         if (sectionId.length() != 0) {
             shopCardId = sectionId.deleteCharAt(sectionId.length() - 1).toString();
         }
-        NetWork.getService(ImpService.class)
-                .ShopAlipay(uid, String.valueOf(addressId), json, shopCardId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ShopAlipayBean>() {
-                    private ShopAlipayBean shopAlipayBean;
+        if (TextUtils.equals(fptypes, "1")) {
+            NetWork.getService(ImpService.class)
+                    .ShopAlipay1(uid, String.valueOf(addressId), json, shopCardId, fptypes,  sprphone, spryx, fpneir)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<ShopAlipayBean>() {
+                        private ShopAlipayBean shopAlipayBean;
 
-                    @Override
-                    public void onCompleted() {
-                        if (shopAlipayBean.getCode() == 0) {
-                            AliPay(shopAlipayBean.getData());
+                        @Override
+                        public void onCompleted() {
+                            if (shopAlipayBean.getCode() == 0) {
+                                AliPay(shopAlipayBean.getData());
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
+                        @Override
+                        public void onError(Throwable e) {
 //                        showToastMessage(e.getMessage());
-                    }
+                        }
 
-                    @Override
-                    public void onNext(ShopAlipayBean shopAlipayBean) {
-                        this.shopAlipayBean = shopAlipayBean;
-                    }
-                });
+                        @Override
+                        public void onNext(ShopAlipayBean shopAlipayBean) {
+                            this.shopAlipayBean = shopAlipayBean;
+                        }
+                    });
+
+        } else {
+            NetWork.getService(ImpService.class)
+                    .ShopAlipay(uid, String.valueOf(addressId), json, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<ShopAlipayBean>() {
+                        private ShopAlipayBean shopAlipayBean;
+
+                        @Override
+                        public void onCompleted() {
+                            if (shopAlipayBean.getCode() == 0) {
+                                AliPay(shopAlipayBean.getData());
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+//                        showToastMessage(e.getMessage());
+                        }
+
+                        @Override
+                        public void onNext(ShopAlipayBean shopAlipayBean) {
+                            this.shopAlipayBean = shopAlipayBean;
+                        }
+                    });
+        }
     }
 
     private static final int SDK_PAY_FLAG = 1;
@@ -474,8 +605,8 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
                     public void onNext(CheckMoneyBean checkMoneyBean) {
                         if (checkMoneyBean.getCode() == 0) {
                             tv_money.setText(checkMoneyBean.getData().getZcount());
-                            tv_youMoney.setText("¥"+checkMoneyBean.getData().getYfei());
-                            tv_free_shipping.setText("(满"+checkMoneyBean.getData().getMbyou()+"包邮)");
+                            tv_youMoney.setText("¥" + checkMoneyBean.getData().getYfei());
+                            tv_free_shipping.setText("(满" + checkMoneyBean.getData().getMbyou() + "包邮)");
                         }
                     }
                 });

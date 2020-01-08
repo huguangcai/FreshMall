@@ -96,6 +96,69 @@ public class OrderDetailBean {
         private List<String> exit_pics;
         private List<GoodsBean> goods;
 
+
+
+
+        private String fptypes;
+        private String dwname;
+        private String nsrsbh;
+        private String sprphone;
+        private String spryx;
+        private String fpneir;
+
+        public String getFptypes() {
+            return fptypes;
+        }
+
+        public void setFptypes(String fptypes) {
+            this.fptypes = fptypes;
+        }
+
+        public String getDwname() {
+            return dwname;
+        }
+
+        public void setDwname(String dwname) {
+            this.dwname = dwname;
+        }
+
+        public String getNsrsbh() {
+            return nsrsbh;
+        }
+
+        public void setNsrsbh(String nsrsbh) {
+            this.nsrsbh = nsrsbh;
+        }
+
+        public String getSprphone() {
+            return sprphone;
+        }
+
+        public void setSprphone(String sprphone) {
+            this.sprphone = sprphone;
+        }
+
+        public String getSpryx() {
+            return spryx;
+        }
+
+        public void setSpryx(String spryx) {
+            this.spryx = spryx;
+        }
+
+        public String getFpneir() {
+            return fpneir;
+        }
+
+        public void setFpneir(String fpneir) {
+            this.fpneir = fpneir;
+        }
+
+
+
+
+
+
         public String getId() {
             return id;
         }

@@ -232,7 +232,20 @@
 
             </LinearLayout>
 
-
+            <TextView
+                android:id="@+id/tvReceipt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:textSize="13sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/color_282828"
+                android:text="发票"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:drawableRight="@mipmap/img_right_arrow"
+                android:paddingRight="15dp"
+                android:background="@color/white"
+                />
         </LinearLayout>
     </ScrollView>
 

@@ -53,6 +53,7 @@ import com.ysxsoft.freshmall.modle.VipDataBean;
 import com.ysxsoft.freshmall.modle.WxPayBean;
 import com.ysxsoft.freshmall.modle.YaoQingInfoBean;
 import com.ysxsoft.freshmall.modle.YueInfoBean;
+import com.ysxsoft.freshmall.utils.NetWork;
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -62,6 +63,7 @@ import retrofit2.http.POST;
 import rx.Observable;
 
 public interface ImpService {
+
     /**
      * 发送短信验证码
      */
@@ -199,7 +201,26 @@ public interface ImpService {
     Observable<ShopAlipayBean> ShopAlipay(@Field("uid") String uid,
                                           @Field("aid") String aid,
                                           @Field("goods") String goods,
-                                          @Field("shopcar") String shopcar);
+                                          @Field("shopcar") String shopcar,
+                                          @Field("fptypes") String fptypes,
+                                          @Field("dwname") String dwname,
+                                          @Field("nsrsbh") String nsrsbh,
+                                          @Field("sprphone") String sprphone,
+                                          @Field("spryx") String spryx,
+                                          @Field("fpneir") String fpneir);
+
+
+    @FormUrlEncoded
+    @POST("pays/ShopAlipay")
+    Observable<ShopAlipayBean> ShopAlipay1(@Field("uid") String uid,
+                                           @Field("aid") String aid,
+                                           @Field("goods") String goods,
+                                           @Field("shopcar") String shopcar,
+                                           @Field("fptypes") String fptypes,
+                                           @Field("sprphone") String sprphone,
+                                           @Field("spryx") String spryx,
+                                           @Field("fpneir") String fpneir);
+
 
     @FormUrlEncoded
     @POST("order/getOrderList")
@@ -462,7 +483,26 @@ public interface ImpService {
     Observable<CommonBean> BalanceData(@Field("uid") String uid,
                                        @Field("aid") String aid,
                                        @Field("goods") String goods,
-                                       @Field("shopcar") String shopcar);
+                                       @Field("shopcar") String shopcar,
+                                       @Field("fptypes") String fptypes,
+                                       @Field("dwname") String dwname,
+                                       @Field("nsrsbh") String nsrsbh,
+                                       @Field("sprphone") String sprphone,
+                                       @Field("spryx") String spryx,
+                                       @Field("fpneir") String fpneir);
+
+
+    @FormUrlEncoded
+    @POST("pays/ShopYuepay")
+    Observable<CommonBean> BalanceData1(@Field("uid") String uid,
+                                        @Field("aid") String aid,
+                                        @Field("goods") String goods,
+                                        @Field("shopcar") String shopcar,
+                                        @Field("fptypes") String fptypes,
+                                        @Field("sprphone") String sprphone,
+                                        @Field("spryx") String spryx,
+                                        @Field("fpneir") String fpneir);
+
 
     @FormUrlEncoded
     @POST("pays/OrderYuepay")
@@ -491,7 +531,25 @@ public interface ImpService {
     Observable<WxPayBean> WxChatPay(@Field("uid") String uid,
                                     @Field("aid") String aid,
                                     @Field("goods") String goods,
-                                    @Field("shopcar") String shopcar);
+                                    @Field("shopcar") String shopcar,
+                                    @Field("fptypes") String fptypes,
+                                    @Field("dwname") String dwname,
+                                    @Field("nsrsbh") String nsrsbh,
+                                    @Field("sprphone") String sprphone,
+                                    @Field("spryx") String spryx,
+                                    @Field("fpneir") String fpneir);
+
+    @FormUrlEncoded
+    @POST("pays/ShopWxpay")
+    Observable<WxPayBean> WxChatPay1(@Field("uid") String uid,
+                                     @Field("aid") String aid,
+                                     @Field("goods") String goods,
+                                     @Field("shopcar") String shopcar,
+                                     @Field("fptypes") String fptypes,
+                                     @Field("sprphone") String sprphone,
+                                     @Field("spryx") String spryx,
+                                     @Field("fpneir") String fpneir);
+
 
     @FormUrlEncoded
     @POST("o2odingdan/Alipay")
@@ -530,6 +588,23 @@ public interface ImpService {
     @FormUrlEncoded
     @POST("order/youfei")
     Observable<CheckMoneyBean> CheckMoney(@Field("jiage") String jiage);
+
+    //已兑换待发货
+    public final String WAIT_FAHUO = NetWork.BaseUrl + "gwq/llist";
+    //已兑换待收货
+    public final String WAIT_SHOUHUO = NetWork.BaseUrl + "gwq/llist";
+    //已兑换已完成
+    public final String COMPLETED = NetWork.BaseUrl + "gwq/llist";
+    //使用优惠券
+    public final String USE_COUPON = NetWork.BaseUrl + "gwq/verify";
+    //下单
+    public final String DOWN_ORDER = NetWork.BaseUrl + "gwq/order";
+    //确认收货
+    public final String CHECK_SHOUHUO = NetWork.BaseUrl + "gwq/on";
+    //订单详情
+    public final String ORDER_DETAIL = NetWork.BaseUrl + "gwq/details";
+    //购物券商品列表
+    public final String GOODS_LIST = NetWork.BaseUrl + "gwq/index";
 
 
 }

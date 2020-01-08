@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="@dimen/dp_10">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintLeft_toRightOf="@id/iv"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:textColor="@color/color_282828"
+        app:layout_constraintTop_toTopOf="@id/iv"
+        android:text="diy云朵捕梦网挂饰小风铃吊饰挂件少女房间幼儿园创意吊顶装饰品 "/>
+
+    <TextView
+        android:id="@+id/tvColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="白色，大号"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@id/iv"
+        app:layout_constraintLeft_toLeftOf="@id/tvDesc"
+        android:textColor="@color/color_666666"/>
+
+    <TextView
+        android:id="@+id/tvNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_12"
+        android:text="1个"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvColor"
+        android:textColor="@color/color_333333"/>
+
+</android.support.constraint.ConstraintLayout>

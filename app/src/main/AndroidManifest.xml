@@ -208,6 +208,14 @@
         <activity android:name=".view.O2OCompleteActivity" />
         <activity android:name=".view.CompleteActivity" />
         <activity android:name=".view.BaiduMapActivity" />
+        <activity android:name=".view.ShopExchangeActivity" />
+        <activity android:name=".view.ExchangedActivity" />
+        <activity android:name=".view.ExchangeWaitGetDetailActivity" />
+        <activity android:name=".view.ExchangeWaitFaDetailActivity" />
+        <activity android:name=".view.ExchangeCompleteDetailActivity" />
+        <activity android:name=".view.ReceiptActivity" />
+        <activity android:name=".view.ShoppingPacketExchangeActivity" />
+        <activity android:name=".view.ExchangeCheckOrderActivity" />
 
 
     </application>

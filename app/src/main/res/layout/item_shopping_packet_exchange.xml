@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="@dimen/dp_10">
+
+        <CheckBox
+            android:id="@+id/cb_box"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:button="@drawable/shop_car_selector"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_goods_tupian"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/cb_box" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="diy云朵捕梦网挂饰 小风铃吊饰挂件少女房间幼儿园创意吊顶装饰品"
+            android:textColor="@color/color_282828"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintLeft_toRightOf="@id/img_goods_tupian"
+            app:layout_constraintTop_toTopOf="@id/img_goods_tupian" />
+
+        <TextView
+            android:id="@+id/tvColorSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="白色，大号"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/img_goods_tupian"
+            app:layout_constraintLeft_toLeftOf="@id/tvDesc" />
+
+        <TextView
+            android:id="@+id/tvNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1个"
+            android:textColor="@color/color_282828"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/img_goods_tupian"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_ebebeb"/>
+
+</LinearLayout>

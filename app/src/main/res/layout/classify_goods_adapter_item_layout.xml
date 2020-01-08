@@ -2,16 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingLeft="5dp"
     android:paddingTop="5dp"
     android:paddingRight="5dp">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/img_tupian"
         android:layout_width="168dp"
         android:layout_height="168dp"
+        app:riv_corner_radius="5dp"
         android:scaleType="centerCrop" />
 
     <TextView

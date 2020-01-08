@@ -17,5 +17,14 @@
     <color name="flow_item_color">#E6E6E6</color>
     <color name="text_color_blue">#4771FB</color>
     <color name="join_shop_card">#FE7B41</color>
+    <color name="color_989898">#989898</color>
+    <color name="color_282828">#282828</color>
+    <color name="color_686868">#686868</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_e6e6e6">#e6e6e6</color>
+    <color name="color_ffe4e4">#FFE4E4</color>
+    <color name="color_ebebeb">#EBEBEB</color>
+    <color name="color_cccccc">#CCCCCC</color>
 
 </resources>

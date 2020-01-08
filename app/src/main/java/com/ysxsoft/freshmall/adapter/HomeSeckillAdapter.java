@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.modle.HomeSeckillBean;
 import com.ysxsoft.freshmall.utils.ImageLoadUtil;
@@ -61,7 +62,7 @@ public class HomeSeckillAdapter extends RecyclerView.Adapter<HomeSeckillAdapter.
 
     public class HomeSeckillHolder extends RecyclerView.ViewHolder{
 
-        private final ImageView img_tupian;
+        private final RoundedImageView img_tupian;
         private final TextView tv_goods_desc,tv_vip_price,tv_old_price;
 
         public HomeSeckillHolder(@NonNull View itemView) {

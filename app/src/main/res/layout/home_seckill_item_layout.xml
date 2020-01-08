@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -13,11 +14,12 @@
         android:layout_marginRight="10dp"
         android:orientation="vertical">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_tupian"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_gravity="center_horizontal"
+            app:riv_corner_radius="5dp"
             android:scaleType="centerCrop" />
 
         <TextView

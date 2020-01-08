@@ -28,7 +28,7 @@ public class WaitFaHouActivity extends BaseActivity implements View.OnClickListe
 
     private TextView tv_wait_fahuo, tv_name, tv_phone_num, tv_address, tv_content, tv_color,
             tv_size, tv_price, tv_goods_money, tv_yunfei, tv_order_sum_money, tv_apply_time,
-            tv_refund_number, tv_pay_type, tv_refund_money, tv_tip_fahuo, tv_no_address, tv_goods_num;
+            tv_refund_number, tv_pay_type, tv_refund_money, tv_tip_fahuo, tv_no_address, tv_goods_num, tvReceipt, tv_yfei;
     private ImageView img_tupian;
     private LinearLayout ll_have_address;
     private String uid;
@@ -36,6 +36,7 @@ public class WaitFaHouActivity extends BaseActivity implements View.OnClickListe
     private MyRecyclerView recyclerdata;
     private String orderId;
     private OrderDetailBean.DataBean data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,14 +69,14 @@ public class WaitFaHouActivity extends BaseActivity implements View.OnClickListe
                         if (orderDetailBean.getCode() == 0) {
                             data = orderDetailBean.getData();
 
-                            if("6".equals(data.getOrder_status())){//TODO:修改Sincerly
+                            if ("6".equals(data.getOrder_status())) {//TODO:修改Sincerly
                                 //如果订单处于退款申请中
                                 tv_refund_money.setVisibility(View.GONE);
                             }
 
                             ApplyRefundMoneyAdapter adapter = new ApplyRefundMoneyAdapter(mContext, data.getGoods());
                             recyclerdata.setAdapter(adapter);
-
+                            tv_yfei.setText(orderDetailBean.getData().getYfei());
                             tv_refund_number.setText(data.getOrder_num());
                             tv_apply_time.setText(data.getPay_time());
                             switch (data.getPay_type()) {
@@ -107,7 +108,6 @@ public class WaitFaHouActivity extends BaseActivity implements View.OnClickListe
                     }
                 });
     }
-
 
     private void RequestAddressData() {
         NetWork.getService(ImpService.class)
@@ -148,6 +148,8 @@ public class WaitFaHouActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initView() {
+        tv_yfei = getViewById(R.id.tv_yfei);
+        tvReceipt = getViewById(R.id.tvReceipt);
         tv_wait_fahuo = getViewById(R.id.tv_wait_fahuo);
         tv_name = getViewById(R.id.tv_name);
         tv_phone_num = getViewById(R.id.tv_phone_num);
@@ -172,6 +174,7 @@ public class WaitFaHouActivity extends BaseActivity implements View.OnClickListe
         tv_refund_money.setOnClickListener(this);
         tv_tip_fahuo.setOnClickListener(this);
         tv_no_address.setOnClickListener(this);
+        tvReceipt.setOnClickListener(this);
     }
 
     @Override
@@ -183,8 +186,8 @@ public class WaitFaHouActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_refund_money:
-                Intent intent=new Intent(mContext,ApplyRefundMoneyActivity.class);
-                intent.putExtra("orderId",data.getId());
+                Intent intent = new Intent(mContext, ApplyRefundMoneyActivity.class);
+                intent.putExtra("orderId", data.getId());
                 startActivity(intent);
                 break;
             case R.id.tv_tip_fahuo:
@@ -193,6 +196,12 @@ public class WaitFaHouActivity extends BaseActivity implements View.OnClickListe
             case R.id.tv_no_address:
                 startActivity(GetGoodsAddressActivity.class);
                 break;
+            case R.id.tvReceipt:
+                Intent intent1 = new Intent(mContext, ReceiptActivity.class);
+                intent1.putExtra("orderId", orderId);
+                startActivity(intent1);
+                break;
+
         }
     }
 

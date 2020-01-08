@@ -6,6 +6,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.com.ListBaseAdapter;
 import com.ysxsoft.freshmall.com.SuperViewHolder;
@@ -49,7 +50,7 @@ public class ShopCardAdapter extends ListBaseAdapter<ShopCarListBean.DataBean> {
     public void onBindItemHolder(SuperViewHolder holder, final int position) {
         final ShopCarListBean.DataBean dataBean = mDataList.get(position);
         final CheckBox cb_box = holder.getView(R.id.cb_box);
-        ImageView img_goods_tupian = holder.getView(R.id.img_goods_tupian);
+        RoundedImageView img_goods_tupian = holder.getView(R.id.img_goods_tupian);
         ImageView img_down_arrow = holder.getView(R.id.img_down_arrow);
         img_down_arrow.setVisibility(View.GONE);
         TextView tv_desc = holder.getView(R.id.tv_desc);

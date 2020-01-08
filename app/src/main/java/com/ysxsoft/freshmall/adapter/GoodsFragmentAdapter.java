@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.com.ListBaseAdapter;
 import com.ysxsoft.freshmall.com.SuperViewHolder;
@@ -26,7 +27,7 @@ public class GoodsFragmentAdapter extends ListBaseAdapter<HomeBestMoreBean.DataB
     @Override
     public void onBindItemHolder(SuperViewHolder holder, int position) {
         HomeBestMoreBean.DataBean dataBean = mDataList.get(position);
-        ImageView img_tupian = holder.getView(R.id.img_tupian);
+        RoundedImageView img_tupian = holder.getView(R.id.img_tupian);
         TextView tv_content = holder.getView(R.id.tv_content);
         TextView tv_current_price = holder.getView(R.id.tv_current_price);
         TextView tv_old_price = holder.getView(R.id.tv_old_price);

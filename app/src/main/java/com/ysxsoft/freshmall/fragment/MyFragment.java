@@ -15,6 +15,7 @@ import com.ysxsoft.freshmall.utils.ImageLoadUtil;
 import com.ysxsoft.freshmall.utils.NetWork;
 import com.ysxsoft.freshmall.utils.SpUtils;
 import com.ysxsoft.freshmall.view.AllOrderActivity;
+import com.ysxsoft.freshmall.view.ShopExchangeActivity;
 import com.ysxsoft.freshmall.view.MyCollectActivity;
 import com.ysxsoft.freshmall.view.MyDistributionActivity;
 import com.ysxsoft.freshmall.view.MyOrderActivity;
@@ -35,12 +36,12 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     private CircleImageView img_head;
     private TextView tv_nikeName, tv_phone_num, tv_my_wallet, tv_wait_get_goods, tv_vip,
             tv_distribution, tv_all_order, tv_wait_pay, tv_wait_fahuo, tv_wait_evaluate, tv_return_goods;
-    private LinearLayout ll_o2o_order, ll_my_collect, ll_agreement, ll_setting;
+    private LinearLayout ll_o2o_order, ll_my_collect, ll_agreement, ll_setting, ll_dhq;
     private String uid;
     private String headurl;
     private String phone;
     private String nikename;
-    private MsgView msg_wait_pay,msg_return_goods,msg_wait_fahuo,msg_wait_get_goods,msg_wait_evaluate;
+    private MsgView msg_wait_pay, msg_return_goods, msg_wait_fahuo, msg_wait_get_goods, msg_wait_evaluate;
 
     @Override
     protected void initData() {
@@ -60,6 +61,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         ll_my_collect = getViewById(R.id.ll_my_collect);
         ll_agreement = getViewById(R.id.ll_agreement);
         ll_setting = getViewById(R.id.ll_setting);
+        ll_dhq = getViewById(R.id.ll_dhq);
 
         msg_wait_pay = getViewById(R.id.msg_wait_pay);
         msg_wait_fahuo = getViewById(R.id.msg_wait_fahuo);
@@ -103,6 +105,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         ll_my_collect.setOnClickListener(this);
         ll_agreement.setOnClickListener(this);
         ll_setting.setOnClickListener(this);
+        ll_dhq.setOnClickListener(this);
     }
 
     @Override
@@ -170,6 +173,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             case R.id.ll_agreement://用户守则
                 startActivity(UserAgreementActivity.class);
                 break;
+
+            case R.id.ll_dhq://购物券兑换
+                startActivity(ShopExchangeActivity.class);
+                break;
             case R.id.ll_setting://设置
                 startActivity(SettingActivity.class);
                 break;
@@ -196,39 +203,39 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
                     @Override
                     public void onCompleted() {
-                        if (numberBean.getCode()==0){
+                        if (numberBean.getCode() == 0) {
                             String dfkcount = numberBean.getData().getDfkcount();
-                            if ("0".equals(dfkcount)){
+                            if ("0".equals(dfkcount)) {
                                 msg_wait_pay.setVisibility(View.GONE);
-                            }else {
+                            } else {
                                 msg_wait_pay.setVisibility(View.VISIBLE);
                                 msg_wait_pay.setText(dfkcount);
                             }
                             String dfhcount = numberBean.getData().getDfhcount();
-                            if ("0".equals(dfhcount)){
+                            if ("0".equals(dfhcount)) {
                                 msg_wait_fahuo.setVisibility(View.GONE);
-                            }else {
+                            } else {
                                 msg_wait_fahuo.setVisibility(View.VISIBLE);
                                 msg_wait_fahuo.setText(dfhcount);
                             }
                             String dshcount = numberBean.getData().getDshcount();
-                            if ("0".equals(dshcount)){
+                            if ("0".equals(dshcount)) {
                                 msg_wait_get_goods.setVisibility(View.GONE);
-                            }else {
+                            } else {
                                 msg_wait_get_goods.setVisibility(View.VISIBLE);
                                 msg_wait_get_goods.setText(dshcount);
                             }
                             String dpjcount = numberBean.getData().getDpjcount();
-                            if ("0".equals(dpjcount)){
+                            if ("0".equals(dpjcount)) {
                                 msg_wait_evaluate.setVisibility(View.GONE);
-                            }else {
+                            } else {
                                 msg_wait_evaluate.setVisibility(View.VISIBLE);
                                 msg_wait_evaluate.setText(dpjcount);
                             }
                             String shcount = numberBean.getData().getShcount();
-                            if ("0".equals(shcount)){
+                            if ("0".equals(shcount)) {
                                 msg_return_goods.setVisibility(View.GONE);
-                            }else {
+                            } else {
                                 msg_return_goods.setVisibility(View.VISIBLE);
                                 msg_return_goods.setText(shcount);
                             }
