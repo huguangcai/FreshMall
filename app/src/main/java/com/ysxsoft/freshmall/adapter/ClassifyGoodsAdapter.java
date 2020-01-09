@@ -39,7 +39,7 @@ public class ClassifyGoodsAdapter extends RecyclerView.Adapter<ClassifyGoodsAdap
             myViewHolder.tv_title.setTextColor(mContext.getResources().getColor(R.color.btn_color));
             myViewHolder.view_line.setBackgroundResource(R.color.btn_color);
         }else {
-            myViewHolder.tv_title.setTextColor(mContext.getResources().getColor(R.color.black));
+            myViewHolder.tv_title.setTextColor(mContext.getResources().getColor(R.color.color_333333));
             myViewHolder.view_line.setBackgroundResource(R.color.transparent);
         }
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

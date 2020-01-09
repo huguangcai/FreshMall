@@ -55,6 +55,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_666666"
             android:text="评论星级：" />
 
         <RatingBar
@@ -74,6 +76,8 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/sp_12"
         android:text="味道很好，非常喜欢，还会再来的！" />
 
     <LinearLayout
@@ -88,8 +92,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2019-3-25 10:20"
-            android:textColor="@color/hint_text_color"
-            android:textSize="12sp" />
+            android:textColor="@color/color_666666"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_color"
@@ -97,8 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="颜色"
-            android:textColor="@color/hint_text_color"
-            android:textSize="12sp" />
+            android:textColor="@color/color_666666"
+            android:textSize="10sp"  />
 
         <TextView
             android:id="@+id/tv_size"

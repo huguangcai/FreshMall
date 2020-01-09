@@ -74,9 +74,9 @@
         tl:tl_indicator_height="1.5dp"
         tl:tl_indicator_width_equal_title="true"
         tl:tl_tab_padding="10dp"
-        tl:tl_tab_space_equal="true"
+        tl:tl_tab_space_equal="false"
         tl:tl_textSelectColor="#FC4F4F"
-        tl:tl_textUnselectColor="#000000"
+        tl:tl_textUnselectColor="#686868"
         tl:tl_underline_color="#1A000000"
         tl:tl_underline_height="1dp" />
 
