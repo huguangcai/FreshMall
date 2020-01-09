@@ -28,8 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:maxLines="2"
+            android:textColor="@color/color_686868"
             android:text="adidas阿迪达斯男平板潮流鞋 "
-            android:textSize="12sp" />
+            android:textSize="11sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                 android:layout_weight="1"
                 android:text="¥666.00"
                 android:textColor="@color/btn_color"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_old_price"
@@ -52,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="¥666.00"
-                android:textSize="13sp" />
+                android:textSize="11sp" />
         </LinearLayout>
 
     </LinearLayout>

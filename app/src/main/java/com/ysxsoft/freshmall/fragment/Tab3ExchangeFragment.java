@@ -81,7 +81,11 @@ public class Tab3ExchangeFragment extends BaseFragment implements SwipeRefreshLa
         //设置底部加载文字提示
         mRecyclerView.setFooterViewHint("拼命加载中", "没有更多数据了", "网络不给力啊，点击再试一次吧");
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        onRefresh();
+    }
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_tab_exchange;

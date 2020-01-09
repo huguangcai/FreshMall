@@ -67,6 +67,7 @@ public class ExchangedActivity extends BaseActivity {
         }
         tabLayout.addOnTabSelectedListener(onTabSelectedListener);
     }
+
     private TabLayout.OnTabSelectedListener onTabSelectedListener = new TabLayout.OnTabSelectedListener() {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {

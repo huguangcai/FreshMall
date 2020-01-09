@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.impservice.OnItemClickListener;
 import com.ysxsoft.freshmall.modle.GetTypeListBean;
@@ -63,7 +64,7 @@ public class O2OHeadviewAdapter extends RecyclerView.Adapter<O2OHeadviewAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView img_tupian;
+        private final RoundedImageView img_tupian;
         private final TextView tv_content;
 
         public MyViewHolder(@NonNull View itemView) {

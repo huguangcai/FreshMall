@@ -47,8 +47,9 @@
                 android:button="@drawable/shop_car_selector"
                 android:gravity="center"
                 android:paddingLeft="10dp"
+                android:textColor="@color/color_999999"
                 android:text="全选"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:id="@+id/ll_goods_sum"
@@ -64,14 +65,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="合计："
-                    android:textSize="12sp" />
+                    android:textColor="@color/color_222222"
+                    android:textSize="11sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¥"
                     android:textColor="@color/btn_color"
-                    android:textSize="12sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_goods_sum_money"
@@ -79,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="0.0"
                     android:textColor="@color/btn_color"
-                    android:textSize="12sp" />
+                    android:textSize="18sp" />
 
 
             </LinearLayout>

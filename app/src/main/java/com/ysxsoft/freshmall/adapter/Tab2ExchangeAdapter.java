@@ -1,6 +1,7 @@
 package com.ysxsoft.freshmall.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.ysxsoft.freshmall.com.RViewHolder;
 import com.ysxsoft.freshmall.com.SuperViewHolder;
 import com.ysxsoft.freshmall.modle.Tab1ExchangeResponse;
 import com.ysxsoft.freshmall.utils.ImageLoadUtil;
+import com.ysxsoft.freshmall.view.ExchangeWaitFaDetailActivity;
+import com.ysxsoft.freshmall.view.ExchangeWaitGetDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,21 +41,19 @@ public class Tab2ExchangeAdapter extends ListBaseAdapter<Tab1ExchangeResponse.Da
 
     @Override
     public void onBindItemHolder(SuperViewHolder holder, int position) {
-        Tab1ExchangeResponse.DataBeanX.DataBean bean = mDataList.get(position);
+        final Tab1ExchangeResponse.DataBeanX.DataBean bean = mDataList.get(position);
         List<Tab1ExchangeResponse.DataBeanX.DataBean.ProductBean> product = bean.getProduct();
         TextView tv_order_number = holder.getView(R.id.tv_order_number);
-        tv_order_number.setText(bean.getDdsh());
+        tv_order_number.setText("订单编号："+bean.getDdsh());
         TextView tvName = holder.getView(R.id.tvName);
         tvName.setText("待收货");
         TextView tvLook = holder.getView(R.id.tvLook);
         tvLook.setVisibility(View.VISIBLE);
         TextView tvTips = holder.getView(R.id.tvTips);
+        tvTips.setText("确认收货");
         RecyclerView recyclerView = holder.getView(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            strings.add(String.valueOf(i));
-        }
+
         RBaseAdapter<Tab1ExchangeResponse.DataBeanX.DataBean.ProductBean> adapter = new RBaseAdapter<Tab1ExchangeResponse.DataBeanX.DataBean.ProductBean>(mContext, R.layout.item_item_tab_exchange_layout, product) {
             @Override
             protected void fillItem(RViewHolder holder, Tab1ExchangeResponse.DataBeanX.DataBean.ProductBean item, int position) {
@@ -60,7 +61,7 @@ public class Tab2ExchangeAdapter extends ListBaseAdapter<Tab1ExchangeResponse.Da
                 ImageLoadUtil.GlideGoodsImageLoad(mContext,item.getSppic(),iv);
                 holder.setText(R.id.tvDesc,item.getSpname());
                 holder.setText(R.id.tvColor,item.getSpgg());
-                holder.setText(R.id.tvNum,item.getDdid()+"个");
+                holder.setText(R.id.tvNum,/*item.getDdid()+*/"1个");
             }
 
             @Override
@@ -68,19 +69,29 @@ public class Tab2ExchangeAdapter extends ListBaseAdapter<Tab1ExchangeResponse.Da
                 return 0;
             }
         };
+        adapter.setOnItemClickListener(new RBaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RViewHolder holder, View view, int position) {
+                Intent intent = new Intent(mContext, ExchangeWaitGetDetailActivity.class);
+                intent.putExtra("oid",String.valueOf(bean.getId()));
+                mContext.startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
         tvTips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onAdapterClickListener!=null){
-                    onAdapterClickListener.onItemClick("");
+                    onAdapterClickListener.onItemClick(String.valueOf(bean.getId()));
                 }
             }
         });
         tvLook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"查看物流",Toast.LENGTH_SHORT).show();
+                if (onAdapterClickListener!=null){
+                    onAdapterClickListener.onLook(String.valueOf(bean.getId()));
+                }
             }
         });
     }

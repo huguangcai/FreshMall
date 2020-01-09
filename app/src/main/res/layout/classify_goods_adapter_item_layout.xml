@@ -1,56 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:paddingLeft="5dp"
-    android:paddingTop="5dp"
-    android:paddingRight="5dp">
+    android:gravity="center"
+    android:paddingTop="@dimen/dp_10"
+    android:orientation="vertical">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/img_tupian"
-        android:layout_width="168dp"
-        android:layout_height="168dp"
-        app:riv_corner_radius="5dp"
-        android:scaleType="centerCrop" />
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:riv_corner_radius="5dp" />
 
     <TextView
         android:id="@+id/tv_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ellipsize="end"
+        android:gravity="center"
         android:maxLines="2"
-        android:textSize="12sp"
         android:text="ins韩版简约手表女小清新文艺
-女生气质复古原宿学院风" />
+女生气质复古原宿学院风"
+        android:textColor="@color/color_282828"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/img_tupian"
+        app:layout_constraintTop_toBottomOf="@id/img_tupian" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/tv_current_price"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:text="¥666"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/tv_content"
+        app:layout_constraintLeft_toLeftOf="@id/tv_content"
+        android:textColor="@color/btn_color"
+        android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tv_current_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="¥666"
-            android:textColor="@color/btn_color" />
-
-        <TextView
-            android:id="@+id/tv_old_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="¥666"
-            android:textSize="12sp"
-            android:textColor="@color/hint_text_color" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_old_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¥666"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/tv_content"
+        app:layout_constraintLeft_toRightOf="@id/tv_current_price"
+        app:layout_constraintRight_toRightOf="@id/img_tupian"
+        app:layout_constraintBottom_toBottomOf="@id/tv_current_price"
+        android:textColor="@color/color_989898"
+        android:textSize="11sp" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="充值金额"
+            android:textColor="@color/color_282828"
             android:textSize="15sp" />
 
         <LinearLayout
@@ -42,8 +43,10 @@
                 android:hint="请输入充值金额"
                 android:inputType="numberDecimal"
                 android:paddingLeft="5dp"
+                android:textColorHint="@color/color_999999"
+                android:textColor="@color/color_282828"
                 android:singleLine="true"
-                android:textSize="20sp" />
+                android:textSize="11sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -64,6 +67,7 @@
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:text="充值方式"
+            android:textColor="@color/color_282828"
             android:textSize="15sp" />
 
 
@@ -86,6 +90,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="支付宝支付"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
@@ -121,6 +126,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="微信支付"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
@@ -156,6 +162,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="充值卡充值"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView

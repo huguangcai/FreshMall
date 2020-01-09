@@ -14,11 +14,13 @@ import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.adapter.Tab1ExchangeAdapter;
 import com.ysxsoft.freshmall.adapter.Tab2ExchangeAdapter;
 import com.ysxsoft.freshmall.impservice.ImpService;
+import com.ysxsoft.freshmall.modle.CommonBean;
 import com.ysxsoft.freshmall.modle.Tab1ExchangeResponse;
 import com.ysxsoft.freshmall.utils.AppUtil;
 import com.ysxsoft.freshmall.utils.BaseFragment;
 import com.ysxsoft.freshmall.utils.JsonUtils;
 import com.ysxsoft.freshmall.utils.SpUtils;
+import com.ysxsoft.freshmall.view.LogisticsDetailActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -61,7 +63,17 @@ public class Tab2ExchangeFragment extends BaseFragment implements SwipeRefreshLa
                 .build();
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(divider);
+        mDataAdapter.setOnDeleteClickListener(new Tab2ExchangeAdapter.OnAdapterClickListener() {
+            @Override
+            public void onItemClick(String id) {
+               submitData(id);
+            }
 
+            @Override
+            public void onLook(String id) {
+                startActivity(LogisticsDetailActivity.class);
+            }
+        });
 
         mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
@@ -83,6 +95,37 @@ public class Tab2ExchangeFragment extends BaseFragment implements SwipeRefreshLa
         mRecyclerView.setFooterViewHint("拼命加载中", "没有更多数据了", "网络不给力啊，点击再试一次吧");
     }
 
+    private void submitData(String id) {
+        OkHttpUtils.post()
+                .url(ImpService.CHECK_SHOUHUO)
+//                .addParams("uid",SpUtils.getSp(getActivity(),"uid"))
+                .addParams("oid",id)
+                .tag(this)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        CommonBean resp = JsonUtils.parseByGson(response, CommonBean.class);
+                        if (resp!=null){
+                            if (resp.getCode()==200){
+                                onRefresh();
+                            }
+                        }
+                    }
+                });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onRefresh();
+    }
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_tab_exchange;

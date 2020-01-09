@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/white_shape_bg"
         android:orientation="vertical">
@@ -38,24 +38,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="简约现代椅子花型设计"
-            android:textSize="12sp" />
+            android:textColor="@color/color_1a1a1a"
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/gray"
+            android:background="@drawable/shape_bg_e6e6e6_radius_5"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="3dp">
 
             <TextView
                 android:id="@+id/tv_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
                 android:text="黄色66666"
-                android:textColor="@color/hint_text_color"
-                android:textSize="11sp" />
+                android:textColor="@color/color_1a1a1a"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/img_down_arrow"
@@ -78,7 +79,7 @@
                 android:layout_marginRight="5dp"
                 android:text="¥"
                 android:textColor="@color/btn_color"
-                android:textSize="12sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_money"
@@ -87,7 +88,7 @@
                 android:layout_weight="1"
                 android:text="120"
                 android:textColor="@color/btn_color"
-                android:textSize="12sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_minus"

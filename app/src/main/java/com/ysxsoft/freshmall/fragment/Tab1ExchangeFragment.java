@@ -17,6 +17,8 @@ import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.adapter.Tab1ExchangeAdapter;
 import com.ysxsoft.freshmall.impservice.ImpService;
 import com.ysxsoft.freshmall.modle.ColleteListBean;
+import com.ysxsoft.freshmall.modle.CommentResponse;
+import com.ysxsoft.freshmall.modle.CommonBean;
 import com.ysxsoft.freshmall.modle.Tab1ExchangeResponse;
 import com.ysxsoft.freshmall.utils.AppUtil;
 import com.ysxsoft.freshmall.utils.BaseFragment;
@@ -35,14 +37,14 @@ import okhttp3.Call;
  * Create By 胡
  * on 2020/1/7 0007
  */
-public class Tab1ExchangeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class Tab1ExchangeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LuRecyclerView mRecyclerView = null;
     private LuRecyclerViewAdapter mLuRecyclerViewAdapter = null;
     private PreviewHandler mHandler = new PreviewHandler();
     private Tab1ExchangeAdapter mDataAdapter;
-    private int page=1;
+    private int page = 1;
     private Tab1ExchangeResponse.DataBeanX data;
 
     @Override
@@ -72,16 +74,17 @@ public class Tab1ExchangeFragment extends BaseFragment implements SwipeRefreshLa
             public void onItemClick(View view, int position) {
                 int id = data.getData().get(position).getId();
                 Intent intent = new Intent(getActivity(), ExchangeWaitFaDetailActivity.class);
-                intent.putExtra("oid",String.valueOf(id));
+                intent.putExtra("oid", String.valueOf(id));
                 startActivity(intent);
             }
         });
         mDataAdapter.setOnClickListener(new Tab1ExchangeAdapter.OnAdapterClickListener() {
             @Override
             public void onItemClick(String id) {
-                Intent intent = new Intent(getActivity(), ExchangeWaitFaDetailActivity.class);
-                intent.putExtra("oid",String.valueOf(id));
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), ExchangeWaitFaDetailActivity.class);
+//                intent.putExtra("oid",String.valueOf(id));
+//                startActivity(intent);
+                tipsData(id);
             }
         });
         mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -102,6 +105,38 @@ public class Tab1ExchangeFragment extends BaseFragment implements SwipeRefreshLa
         //设置底部加载文字提示
         mRecyclerView.setFooterViewHint("拼命加载中", "没有更多数据了", "网络不给力啊，点击再试一次吧");
 
+    }
+
+    private void tipsData(String id) {
+        OkHttpUtils.post()
+                .url(ImpService.TIPS_FAHUO)
+                .addParams("uid", SpUtils.getSp(getActivity(), "uid"))
+                .addParams("oid", id)
+                .tag(this)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        CommonBean resp = JsonUtils.parseByGson(response, CommonBean.class);
+                        if (resp != null) {
+                            showToastMessage(resp.getMsg());
+                            if (resp.getCode() ==200) {
+                                onRefresh();
+                            }
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onRefresh();
     }
 
     @Override
@@ -125,6 +160,7 @@ public class Tab1ExchangeFragment extends BaseFragment implements SwipeRefreshLa
             mHandler.sendEmptyMessage(-3);
         }
     }
+
     private class PreviewHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -160,7 +196,7 @@ public class Tab1ExchangeFragment extends BaseFragment implements SwipeRefreshLa
     private void getData() {
         OkHttpUtils.post()
                 .url(ImpService.WAIT_FAHUO)
-                .addParams("uid", SpUtils.getSp(getActivity(),"uid"))
+                .addParams("uid", SpUtils.getSp(getActivity(), "uid"))
                 .addParams("type", "0")
                 .addParams("page", String.valueOf(page))
                 .tag(this)
@@ -174,8 +210,8 @@ public class Tab1ExchangeFragment extends BaseFragment implements SwipeRefreshLa
                     @Override
                     public void onResponse(String response, int id) {
                         Tab1ExchangeResponse resp = JsonUtils.parseByGson(response, Tab1ExchangeResponse.class);
-                        if (resp!=null){
-                            if (resp.getCode()==200){
+                        if (resp != null) {
+                            if (resp.getCode() == 200) {
                                 showData(resp.getData());
                                 List<Tab1ExchangeResponse.DataBeanX.DataBean> data = resp.getData().getData();
                                 mDataAdapter.addAll(data);

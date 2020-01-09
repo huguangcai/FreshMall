@@ -25,6 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:singleLine="true"
+            android:textColor="@color/color_282828"
+            android:textSize="@dimen/sp_12"
             android:text="奥尔良鸡排肉香..." />
 
 
@@ -34,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="¥666.00"
+            android:textSize="15sp"
             android:textColor="@color/btn_color" />
 
 

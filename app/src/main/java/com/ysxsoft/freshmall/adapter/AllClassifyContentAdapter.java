@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.impservice.OnItemClickListener;
 import com.ysxsoft.freshmall.modle.GetTypeListBean;
@@ -55,7 +56,7 @@ public class AllClassifyContentAdapter extends RecyclerView.Adapter<AllClassifyC
 
     public class ContentViewHordle extends RecyclerView.ViewHolder{
 
-        private final ImageView img_tupian;
+        private final RoundedImageView img_tupian;
         private final TextView tv_content;
 
         public ContentViewHordle(@NonNull View itemView) {

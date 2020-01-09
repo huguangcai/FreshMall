@@ -69,7 +69,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     private GoodDetailBean.DataBean data;
     private MyRecyclerView rv_tupian;
     private String uid;
-    private TextView tv_goods_num, tv_time_desc,tv_weight,tv_producing_area,tv_method,tv_use_date;
+    private TextView tv_goods_num, tv_time_desc, tv_weight, tv_producing_area, tv_method, tv_use_date;
     private String goodsId, seckill;
     private LinearLayout ll_have_evaluate;
     private ArrayList<PackageDetailBean.DetailData> detailBeans = new ArrayList<>();
@@ -525,10 +525,10 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         }
     };
 
-    public String getNewContent(String htmltext){
+    public String getNewContent(String htmltext) {
         Document doc = Jsoup.parse(htmltext);
         Elements elements = doc.getElementsByTag("img");
-        for (int i = 0; i <elements.size(); i++) {
+        for (int i = 0; i < elements.size(); i++) {
             Element element = elements.get(i);
             element.attr("width", "100%").attr("height", "auto");
         }
@@ -543,8 +543,10 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onPause() {
         detailBeans.clear();
-        if (data.getMsmsg() != null) {
-            timer.cancel();
+        if (data != null) {
+            if (data.getMsmsg() != null) {
+                timer.cancel();
+            }
         }
         super.onPause();
     }
@@ -552,8 +554,10 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (data.getMsmsg() != null) {
-            timer.cancel();
+        if (data != null) {
+            if (data.getMsmsg() != null) {
+                timer.cancel();
+            }
         }
     }
 }

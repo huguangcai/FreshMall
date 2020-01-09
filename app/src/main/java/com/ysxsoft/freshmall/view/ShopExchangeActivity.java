@@ -66,7 +66,7 @@ public class ShopExchangeActivity extends BaseActivity {
     }
 
     private void submitData() {
-        customDialog.show();
+//        customDialog.show();
         OkHttpUtils.post()
                 .url(ImpService.USE_COUPON)
                 .addParams("uid", SpUtils.getSp(mContext,"uid"))
@@ -77,12 +77,12 @@ public class ShopExchangeActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        customDialog.dismiss();
+//                        customDialog.dismiss();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        customDialog.dismiss();
+//                        customDialog.dismiss();
                         CommentResponse resp = JsonUtils.parseByGson(response, CommentResponse.class);
                         if (resp != null) {
                             if (resp.getCode()==200) {

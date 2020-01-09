@@ -22,6 +22,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/font_15sp"
+                android:textColor="@color/color_333333"
                 android:text="收货人:" />
 
             <EditText
@@ -31,6 +33,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:hint="请输入您的姓名"
+                android:textColor="@color/color_282828"
+                android:textColorHint="@color/color_cccccc"
+                android:textSize="@dimen/font_13sp"
                 android:singleLine="true" />
 
 
@@ -49,6 +54,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/font_15sp"
+                android:textColor="@color/color_333333"
                 android:text="手机号:" />
 
             <EditText
@@ -60,6 +67,9 @@
                 android:hint="请输入您的手机号"
                 android:inputType="number"
                 android:maxLength="11"
+                android:textColor="@color/color_282828"
+                android:textColorHint="@color/color_cccccc"
+                android:textSize="@dimen/font_13sp"
                 android:singleLine="true" />
 
 
@@ -78,6 +88,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/font_15sp"
+                android:textColor="@color/color_333333"
                 android:text="省市区:" />
 
             <TextView
@@ -85,6 +97,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
+                android:textColor="@color/color_282828"
+                android:textColorHint="@color/color_cccccc"
+                android:textSize="@dimen/font_13sp"
                 android:hint="请选择" />
         </LinearLayout>
 
@@ -101,6 +116,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/font_15sp"
+                android:textColor="@color/color_333333"
                 android:text="详细地址:" />
 
             <EditText
@@ -108,9 +125,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:textColor="@color/color_282828"
+                android:textColorHint="@color/color_cccccc"
                 android:gravity="right"
                 android:hint="请输入您的详细地址"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
         </LinearLayout>
 

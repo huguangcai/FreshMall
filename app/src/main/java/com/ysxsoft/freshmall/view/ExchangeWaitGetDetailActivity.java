@@ -12,13 +12,24 @@ import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.com.RBaseAdapter;
 import com.ysxsoft.freshmall.com.RViewHolder;
 import com.ysxsoft.freshmall.impservice.ImpService;
+import com.ysxsoft.freshmall.modle.CommonBean;
+import com.ysxsoft.freshmall.modle.ExchangeResponse;
 import com.ysxsoft.freshmall.modle.GetAddressListBean;
+import com.ysxsoft.freshmall.utils.AppUtil;
 import com.ysxsoft.freshmall.utils.BaseActivity;
+import com.ysxsoft.freshmall.utils.ImageLoadUtil;
+import com.ysxsoft.freshmall.utils.JsonUtils;
 import com.ysxsoft.freshmall.utils.NetWork;
 import com.ysxsoft.freshmall.utils.SpUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import okhttp3.Call;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -29,7 +40,7 @@ import rx.schedulers.Schedulers;
  * 待收货详情
  */
 public class ExchangeWaitGetDetailActivity extends BaseActivity {
-    private TextView tvName,tvNum,tvLook,tvKd;
+    private TextView tvName, tvNum, tvLook, tvKd;
     private TextView tvPhone;
     private TextView tvAddress;
     private RecyclerView recyclerView;
@@ -40,14 +51,64 @@ public class ExchangeWaitGetDetailActivity extends BaseActivity {
     private TextView tv_no_address;
     private ConstraintLayout cL2;
     private int addressId;
+    private String oid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        oid = getIntent().getStringExtra("oid");
         setBackVisibily();
         setTitle("待收货");
         initView();
+        requestData();
     }
+
+    private void requestData() {
+        OkHttpUtils.post()
+                .url(ImpService.ORDER_DETAIL)
+                .addParams("oid", oid)
+                .tag(this)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        ExchangeResponse resp = JsonUtils.parseByGson(response, ExchangeResponse.class);
+                        if (resp != null) {
+                            if (resp.getCode() == 200) {
+                                ExchangeResponse.DataBeanX.DataBean dataBean = resp.getData().getData().get(0);
+
+                                tvOrder.setText("订单编号：" + dataBean.getDdsh());
+                                tvTime.setText("兑换时间：" + AppUtil.FormarTime(AppUtil.AppTime.All, Long.valueOf(dataBean.getDhtime())));
+
+                                List<ExchangeResponse.DataBeanX.DataBean.ProductBean> product = resp.getData().getData().get(0).getProduct();
+                                RBaseAdapter<ExchangeResponse.DataBeanX.DataBean.ProductBean> adapter = new RBaseAdapter<ExchangeResponse.DataBeanX.DataBean.ProductBean>(mContext, R.layout.item_item_tab_exchange_layout, product) {
+                                    @Override
+                                    protected void fillItem(RViewHolder holder, ExchangeResponse.DataBeanX.DataBean.ProductBean item, int position) {
+                                        ImageView iv = holder.getView(R.id.iv);
+                                        ImageLoadUtil.GlideGoodsImageLoad(mContext, item.getSppic(), iv);
+                                        holder.setText(R.id.tvDesc, item.getSpname());
+                                        holder.setText(R.id.tvColor, item.getSpgg());
+                                        holder.setText(R.id.tvNum, /*item.getDdid() + */"1个");
+                                    }
+
+                                    @Override
+                                    protected int getViewType(ExchangeResponse.DataBeanX.DataBean.ProductBean item, int position) {
+                                        return 0;
+                                    }
+                                };
+                                recyclerView.setAdapter(adapter);
+                            }
+                        }
+                    }
+                });
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -56,7 +117,7 @@ public class ExchangeWaitGetDetailActivity extends BaseActivity {
 
     private void RequestAddressData() {
         NetWork.getService(ImpService.class)
-                .getDefaultAddressData(SpUtils.getSp(mContext,"uid"))
+                .getDefaultAddressData(SpUtils.getSp(mContext, "uid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GetAddressListBean>() {
@@ -77,6 +138,9 @@ public class ExchangeWaitGetDetailActivity extends BaseActivity {
                             tvName.setText(getAddressListBean.getData().get(0).getShname());
                             tvPhone.setText(getAddressListBean.getData().get(0).getShphone());
                             tvAddress.setText(getAddressListBean.getData().get(0).getShxxdz());
+                        } else if (getAddressListBean.getCode() == 1) {
+                            tv_no_address.setVisibility(View.VISIBLE);
+                            cL2.setVisibility(View.GONE);
                         }
                     }
 
@@ -108,34 +172,48 @@ public class ExchangeWaitGetDetailActivity extends BaseActivity {
         tvLook = getViewById(R.id.tvLook);
         tvTips = getViewById(R.id.tvTips);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        ArrayList<String> strings = new ArrayList<>();
-
-        for (int i = 0; i < 4; i++) {
-            strings.add(String.valueOf(i));
-        }
-        RBaseAdapter<String> adapter = new RBaseAdapter<String>(mContext, R.layout.item_item_tab_exchange_layout, strings) {
-            @Override
-            protected void fillItem(RViewHolder holder, String item, int position) {
-                ImageView iv = holder.getView(R.id.iv);
-//                ImageLoadUtil.GlideGoodsImageLoad(mContext,item,iv);
-//                holder.setText(R.id.tvDesc,"");
-//                holder.setText(R.id.tvColor,"");
-//                holder.setText(R.id.tvNum,"");
-            }
-
-            @Override
-            protected int getViewType(String item, int position) {
-                return 0;
-            }
-        };
-        recyclerView.setAdapter(adapter);
+//        ArrayList<String> strings = new ArrayList<>();
+//
+//        for (int i = 0; i < 4; i++) {
+//            strings.add(String.valueOf(i));
+//        }
+//        RBaseAdapter<String> adapter = new RBaseAdapter<String>(mContext, R.layout.item_item_tab_exchange_layout, strings) {
+//            @Override
+//            protected void fillItem(RViewHolder holder, String item, int position) {
+//                ImageView iv = holder.getView(R.id.iv);
+////                ImageLoadUtil.GlideGoodsImageLoad(mContext,item,iv);
+////                holder.setText(R.id.tvDesc,"");
+////                holder.setText(R.id.tvColor,"");
+////                holder.setText(R.id.tvNum,"");
+//            }
+//
+//            @Override
+//            protected int getViewType(String item, int position) {
+//                return 0;
+//            }
+//        };
+//        recyclerView.setAdapter(adapter);
         tvTips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                submitData(oid);
             }
         });
+        tv_no_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(GetGoodsAddressActivity.class);
+            }
+        });
+
+
         cL1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(LogisticsDetailActivity.class);
+            }
+        });
+        tvLook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(LogisticsDetailActivity.class);
@@ -143,6 +221,32 @@ public class ExchangeWaitGetDetailActivity extends BaseActivity {
         });
 
     }
+
+    private void submitData(String id) {
+        OkHttpUtils.post()
+                .url(ImpService.CHECK_SHOUHUO)
+//                .addParams("uid",SpUtils.getSp(getActivity(),"uid"))
+                .addParams("oid", id)
+                .tag(this)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        CommonBean resp = JsonUtils.parseByGson(response, CommonBean.class);
+                        if (resp != null) {
+                            if (resp.getCode() == 200) {
+                                finish();
+                            }
+                        }
+                    }
+                });
+    }
+
 
     @Override
     public int getLayout() {

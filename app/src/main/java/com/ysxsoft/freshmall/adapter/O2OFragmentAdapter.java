@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.impservice.OnItemClickListener;
 import com.ysxsoft.freshmall.modle.GetTypeListBean;
@@ -171,7 +172,7 @@ public class O2OFragmentAdapter extends RecyclerView.Adapter implements OnBanner
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView img_tupian;
+        private final RoundedImageView img_tupian;
         private final TextView tv_distance;
         private final TextView tv_price, tv_mall_name, tv_xiaoliang;
 

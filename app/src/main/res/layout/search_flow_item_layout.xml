@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@color/white"
+    android:background="@drawable/shape_white_radius_5"
     android:padding="5dp"
     android:text="鞋子">
 

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,8 +14,10 @@ import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.com.RBaseAdapter;
 import com.ysxsoft.freshmall.com.RViewHolder;
 import com.ysxsoft.freshmall.impservice.ImpService;
+import com.ysxsoft.freshmall.modle.CommonBean;
 import com.ysxsoft.freshmall.modle.ExchangeResponse;
 import com.ysxsoft.freshmall.modle.GetAddressListBean;
+import com.ysxsoft.freshmall.utils.AppUtil;
 import com.ysxsoft.freshmall.utils.BaseActivity;
 import com.ysxsoft.freshmall.utils.ImageLoadUtil;
 import com.ysxsoft.freshmall.utils.JsonUtils;
@@ -22,7 +26,9 @@ import com.ysxsoft.freshmall.utils.SpUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -58,6 +64,7 @@ public class ExchangeWaitFaDetailActivity extends BaseActivity {
         initView();
         requestData();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -66,7 +73,7 @@ public class ExchangeWaitFaDetailActivity extends BaseActivity {
 
     private void RequestAddressData() {
         NetWork.getService(ImpService.class)
-                .getDefaultAddressData(SpUtils.getSp(mContext,"uid"))
+                .getDefaultAddressData(SpUtils.getSp(mContext, "uid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GetAddressListBean>() {
@@ -87,6 +94,9 @@ public class ExchangeWaitFaDetailActivity extends BaseActivity {
                             tvName.setText(getAddressListBean.getData().get(0).getShname());
                             tvPhone.setText(getAddressListBean.getData().get(0).getShphone());
                             tvAddress.setText(getAddressListBean.getData().get(0).getShxxdz());
+                        }else if (getAddressListBean.getCode() == 1){
+                            tv_no_address.setVisibility(View.VISIBLE);
+                            cL1.setVisibility(View.GONE);
                         }
                     }
 
@@ -120,6 +130,12 @@ public class ExchangeWaitFaDetailActivity extends BaseActivity {
                         ExchangeResponse resp = JsonUtils.parseByGson(response, ExchangeResponse.class);
                         if (resp != null) {
                             if (resp.getCode() == 200) {
+                                ExchangeResponse.DataBeanX.DataBean dataBean = resp.getData().getData().get(0);
+
+                                tvOrder.setText("订单编号：" + dataBean.getDdsh());
+                                tvTime.setText("兑换时间：" + AppUtil.FormarTime(AppUtil.AppTime.All, Long.valueOf(dataBean.getDhtime())));
+
+
                                 List<ExchangeResponse.DataBeanX.DataBean.ProductBean> product = resp.getData().getData().get(0).getProduct();
                                 RBaseAdapter<ExchangeResponse.DataBeanX.DataBean.ProductBean> adapter = new RBaseAdapter<ExchangeResponse.DataBeanX.DataBean.ProductBean>(mContext, R.layout.item_item_tab_exchange_layout, product) {
                                     @Override
@@ -128,7 +144,7 @@ public class ExchangeWaitFaDetailActivity extends BaseActivity {
                                         ImageLoadUtil.GlideGoodsImageLoad(mContext, item.getSppic(), iv);
                                         holder.setText(R.id.tvDesc, item.getSpname());
                                         holder.setText(R.id.tvColor, item.getSpgg());
-                                        holder.setText(R.id.tvNum, item.getDdid()+"个");
+                                        holder.setText(R.id.tvNum, /*item.getDdid() +*/ "1个");
                                     }
 
                                     @Override
@@ -156,13 +172,44 @@ public class ExchangeWaitFaDetailActivity extends BaseActivity {
         tvTime = getViewById(R.id.tvTime);
         tvTips = getViewById(R.id.tvTips);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-
+        tv_no_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(GetGoodsAddressActivity.class);
+            }
+        });
         tvTips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                tipsData(oid);
             }
         });
+    }
+
+    private void tipsData(String oid) {
+        OkHttpUtils.post()
+                .url(ImpService.TIPS_FAHUO)
+                .addParams("uid", SpUtils.getSp(mContext, "uid"))
+                .addParams("oid", oid)
+                .tag(this)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        CommonBean resp = JsonUtils.parseByGson(response, CommonBean.class);
+                        if (resp != null) {
+                            showToastMessage(resp.getMsg());
+                            if (resp.getCode() == 200) {
+                                finish();
+                            }
+                        }
+                    }
+                });
     }
 
 

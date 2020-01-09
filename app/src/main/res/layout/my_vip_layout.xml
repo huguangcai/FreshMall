@@ -159,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="会员充值/续费"
+                android:textColor="@color/color_282828"
                 android:textSize="14sp" />
 
             <View
@@ -179,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="会员1个月"
+                    android:textColor="@color/color_282828"
                     android:textSize="15sp" />
 
                 <View
@@ -219,6 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="会员6个月"
+                    android:textColor="@color/color_282828"
                     android:textSize="15sp" />
 
                 <View
@@ -259,6 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="会员12个月"
+                    android:textColor="@color/color_282828"
                     android:textSize="15sp" />
 
                 <View
@@ -295,6 +299,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="购买须知："
+                android:textColor="@color/color_686868"
                 android:textSize="15sp" />
 
             <LinearLayout
@@ -307,6 +312,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1.充值会员有效期至"
+                    android:textColor="@color/color_686868"
                     android:textSize="15sp" />
 
                 <TextView
@@ -321,6 +327,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:textColor="@color/color_686868"
                 android:text="2.VIP年卡为服务类产品，一经售出不予退还 "
                 android:textSize="15sp" />
 
@@ -343,6 +350,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="支付宝"
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -378,6 +386,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="微信"
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -396,9 +405,9 @@
             style="@style/btn_style"
             android:layout_marginLeft="65dp"
             android:layout_marginRight="65dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginVertical="30dp"
             android:text="立即开通"
-            android:layout_marginBottom="20dp"/>
+            />
 
     </LinearLayout>
 </ScrollView>

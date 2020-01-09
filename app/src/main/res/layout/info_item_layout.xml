@@ -18,6 +18,7 @@
             android:layout_margin="15dp"
             android:layout_weight="1"
             android:singleLine="true"
+            android:textColor="@color/color_282828"
             android:text="标题标题标题标题"
             android:textSize="15sp" />
 
@@ -38,6 +39,7 @@
         android:layout_marginRight="15dp"
         android:ellipsize="end"
         android:maxLines="2"
+        android:textColor="@color/color_999999"
         android:text="顶顶dfdfdfasdfasdfasdfasdfadsfasdfasdfasdfasdfasdfasdfasdfasdfasdfad顶顶"
         android:textSize="12sp" />
 
@@ -47,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="15dp"
+        android:textColor="@color/color_999999"
+        android:textSize="10sp"
         android:gravity="right"
         android:text="15:51" />
 

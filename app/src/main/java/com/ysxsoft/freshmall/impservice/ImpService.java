@@ -605,6 +605,10 @@ public interface ImpService {
     public final String ORDER_DETAIL = NetWork.BaseUrl + "gwq/details";
     //购物券商品列表
     public final String GOODS_LIST = NetWork.BaseUrl + "gwq/index";
+    //时间
+    public final String GET_TIME = NetWork.BaseUrl + "gwq/schedule";
+    //订单提醒发货
+    public final String TIPS_FAHUO = NetWork.BaseUrl + "gwq/upload_time";
 
 
 }

@@ -41,14 +41,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_phone_num"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textColor="@color/color_989898"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -68,7 +70,8 @@
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="我的钱包"
-                        android:textSize="12sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="13sp" />
 
                     <View
                         android:layout_width="1dp"
@@ -84,7 +87,8 @@
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="我的会员"
-                        android:textSize="12sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="13sp" />
 
                     <View
                         android:layout_width="1dp"
@@ -100,7 +104,8 @@
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="我的分销"
-                        android:textSize="12sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -136,6 +141,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
+                    android:textColor="@color/color_282828"
+                    android:textSize="15sp"
                     android:text="商城订单" />
 
                 <TextView
@@ -143,6 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:textColor="@color/color_686868"
+                    android:textSize="11sp"
                     android:drawableRight="@mipmap/img_right_arrow"
                     android:text="全部订单" />
 
@@ -169,7 +178,8 @@
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="待支付"
-                        android:textSize="11sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="12sp"/>
 
                     <com.ysxsoft.freshmall.widget.segmenttablayout.MsgView
                         android:id="@+id/msg_wait_pay"
@@ -200,7 +210,8 @@
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="待发货"
-                        android:textSize="11sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="12sp" />
 
                     <com.ysxsoft.freshmall.widget.segmenttablayout.MsgView
                         android:id="@+id/msg_wait_fahuo"
@@ -231,7 +242,8 @@
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="待收货"
-                        android:textSize="11sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="12sp" />
 
                     <com.ysxsoft.freshmall.widget.segmenttablayout.MsgView
                         android:id="@+id/msg_wait_get_goods"
@@ -262,7 +274,8 @@
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="待评价"
-                        android:textSize="11sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="12sp"/>
 
                     <com.ysxsoft.freshmall.widget.segmenttablayout.MsgView
                         android:id="@+id/msg_wait_evaluate"
@@ -293,7 +306,8 @@
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="退货/售后"
-                        android:textSize="11sp" />
+                        android:textColor="@color/color_282828"
+                        android:textSize="12sp" />
 
                     <com.ysxsoft.freshmall.widget.segmenttablayout.MsgView
                         android:id="@+id/msg_return_goods"
@@ -347,6 +361,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/color_282828"
+                        android:textSize="@dimen/font_15sp"
                         android:text="O2O订单" />
 
 
@@ -390,6 +406,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/color_282828"
+                        android:textSize="@dimen/font_15sp"
                         android:text="我的收藏" />
 
 
@@ -432,6 +450,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/color_282828"
+                        android:textSize="@dimen/font_15sp"
                         android:text="用户守则" />
 
 
@@ -474,6 +494,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/color_282828"
+                        android:textSize="@dimen/font_15sp"
                         android:text="购物券兑换" />
 
 
@@ -517,6 +539,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/color_282828"
+                        android:textSize="@dimen/font_15sp"
                         android:text="设置" />
 
 

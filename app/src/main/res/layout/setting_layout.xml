@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="清除缓存"
+                android:textColor="@color/color_282828"
                 android:textSize="15sp" />
 
             <ImageView
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="分享APP"
+                android:textColor="@color/color_282828"
                 android:textSize="15sp" />
 
             <ImageView
@@ -76,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="版本更新"
+                android:textColor="@color/color_282828"
                 android:textSize="15sp" />
 
             <ImageView
@@ -101,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="意见反馈"
+                android:textColor="@color/color_282828"
                 android:textSize="15sp" />
 
             <ImageView
@@ -126,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="关于我们"
+                android:textColor="@color/color_282828"
                 android:textSize="15sp" />
 
             <ImageView

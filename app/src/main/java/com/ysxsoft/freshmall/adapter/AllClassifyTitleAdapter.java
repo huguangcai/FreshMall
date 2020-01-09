@@ -41,8 +41,8 @@ public class AllClassifyTitleAdapter extends RecyclerView.Adapter<AllClassifyTit
             titleViewHordle.tv_title_classify.setBackgroundResource(R.color.white);
             titleViewHordle.tv_title_classify.setTextColor(context.getResources().getColor(R.color.btn_color));
         }else {
-            titleViewHordle.tv_title_classify.setBackgroundResource(R.color.gray);
-            titleViewHordle.tv_title_classify.setTextColor(context.getResources().getColor(R.color.black));
+            titleViewHordle.tv_title_classify.setBackgroundResource(R.color.color_f7f7f7);
+            titleViewHordle.tv_title_classify.setTextColor(context.getResources().getColor(R.color.color_282828));
         }
         titleViewHordle.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

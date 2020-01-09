@@ -1,6 +1,7 @@
 package com.ysxsoft.freshmall.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,6 +15,8 @@ import com.ysxsoft.freshmall.com.RViewHolder;
 import com.ysxsoft.freshmall.com.SuperViewHolder;
 import com.ysxsoft.freshmall.modle.Tab1ExchangeResponse;
 import com.ysxsoft.freshmall.utils.ImageLoadUtil;
+import com.ysxsoft.freshmall.view.ExchangeCompleteDetailActivity;
+import com.ysxsoft.freshmall.view.ExchangeWaitGetDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +41,10 @@ public class Tab3ExchangeAdapter extends ListBaseAdapter<Tab1ExchangeResponse.Da
     @Override
     public void onBindItemHolder(SuperViewHolder holder, int position) {
 
-        Tab1ExchangeResponse.DataBeanX.DataBean bean = mDataList.get(position);
+        final Tab1ExchangeResponse.DataBeanX.DataBean bean = mDataList.get(position);
         List<Tab1ExchangeResponse.DataBeanX.DataBean.ProductBean> product = bean.getProduct();
         TextView tv_order_number = holder.getView(R.id.tv_order_number);
-        tv_order_number.setText(bean.getDdsh());
+        tv_order_number.setText("订单编号："+bean.getDdsh());
         TextView tvName = holder.getView(R.id.tvName);
         tvName.setText("已完成");
         TextView tvLook = holder.getView(R.id.tvLook);
@@ -61,7 +64,7 @@ public class Tab3ExchangeAdapter extends ListBaseAdapter<Tab1ExchangeResponse.Da
                 ImageLoadUtil.GlideGoodsImageLoad(mContext,item.getSppic(),iv);
                 holder.setText(R.id.tvDesc,item.getSpname());
                 holder.setText(R.id.tvColor,item.getSpgg());
-                holder.setText(R.id.tvNum,item.getDdid()+"个");
+                holder.setText(R.id.tvNum,/*item.getDdid()+*/"1个");
             }
 
             @Override
@@ -69,6 +72,14 @@ public class Tab3ExchangeAdapter extends ListBaseAdapter<Tab1ExchangeResponse.Da
                 return 0;
             }
         };
+        adapter.setOnItemClickListener(new RBaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RViewHolder holder, View view, int position) {
+                Intent intent = new Intent(mContext, ExchangeCompleteDetailActivity.class);
+                intent.putExtra("oid",String.valueOf(bean.getId()));
+                mContext.startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
         tvTips.setOnClickListener(new View.OnClickListener() {
             @Override

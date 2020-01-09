@@ -46,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:text="时装上衣"
+                    android:textColor="@color/color_282828"
                     android:textSize="12sp" />
 
                 <TextView
@@ -65,8 +66,8 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:text="¥888.00"
-                    android:textColor="@color/hint_text_color"
-                    android:textSize="12sp" />
+                    android:textColor="@color/color_989898"
+                    android:textSize="10sp" />
             </LinearLayout>
 
                 <ImageView
@@ -126,6 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="每日坚果500克"
+                        android:textColor="@color/color_282828"
                         android:textSize="12sp" />
 
                     <LinearLayout
@@ -149,7 +151,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="¥888.00"
-                            android:textColor="@color/hint_text_color"
+                            android:textColor="@color/color_989898"
                             android:textSize="10sp" />
                     </LinearLayout>
 
@@ -206,6 +208,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="每日坚果500克"
+                        android:textColor="@color/color_282828"
                         android:textSize="12sp" />
 
                     <LinearLayout
@@ -229,7 +232,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="¥888.00"
-                            android:textColor="@color/hint_text_color"
+                            android:textColor="@color/color_989898"
                             android:textSize="10sp" />
                     </LinearLayout>
 
@@ -273,15 +276,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="今日秒杀"
+                android:textColor="@color/color_282828"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="#F2F2F2"
-                android:padding="5dp"
+                android:background="@drawable/shape_bg_e6e6e6_radius_5"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="3dp"
+                android:textColor="@color/color_282828"
                 android:text="10:00开始" />
 
             <TextView
@@ -291,6 +297,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
+                android:textSize="10sp"
                 android:text="00:00:00" />
 
             <TextView
@@ -346,6 +353,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:gravity="right"
+                android:textColor="@color/color_686868"
+                android:textSize="11sp"
                 android:text="MORE>" />
 
 
@@ -377,6 +386,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/color_282828"
+                android:textSize="@dimen/font_15sp"
                 android:text="新品推荐" />
 
             <TextView
@@ -385,6 +396,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
+                android:textColor="@color/color_686868"
+                android:textSize="11sp"
                 android:text="MORE>" />
 
 
@@ -416,6 +429,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/color_282828"
                 android:text="品质优选" />
 
             <TextView
@@ -424,6 +439,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
+                android:textColor="@color/color_686868"
+                android:textSize="11sp"
                 android:text="MORE>" />
 
 

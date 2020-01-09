@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.ysxsoft.freshmall.R;
 import com.ysxsoft.freshmall.com.ListBaseAdapter;
 import com.ysxsoft.freshmall.com.SuperViewHolder;
@@ -25,7 +26,7 @@ public class O2OMoreClassifyListAdapter extends ListBaseAdapter<O2OSearchDataBea
     @Override
     public void onBindItemHolder(SuperViewHolder holder, int position) {
         O2OSearchDataBean.DataBean dataBean = mDataList.get(position);
-        ImageView img_tupian = holder.getView(R.id.img_tupian);
+        RoundedImageView img_tupian = holder.getView(R.id.img_tupian);
         TextView tv_mall_name = holder.getView(R.id.tv_mall_name);
         TextView tv_distance = holder.getView(R.id.tv_distance);
         TextView tv_xiaoliang = holder.getView(R.id.tv_xiaoliang);
