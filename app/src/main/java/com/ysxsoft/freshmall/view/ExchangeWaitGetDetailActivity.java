@@ -84,7 +84,8 @@ public class ExchangeWaitGetDetailActivity extends BaseActivity {
 
                                 tvOrder.setText("订单编号：" + dataBean.getDdsh());
                                 tvTime.setText("兑换时间：" + AppUtil.FormarTime(AppUtil.AppTime.All, Long.valueOf(dataBean.getDhtime())));
-
+                                tvNum.setText("快递编号： "+dataBean.getKddhs());
+                                tvKd.setText(dataBean.getShdzs());
                                 List<ExchangeResponse.DataBeanX.DataBean.ProductBean> product = resp.getData().getData().get(0).getProduct();
                                 RBaseAdapter<ExchangeResponse.DataBeanX.DataBean.ProductBean> adapter = new RBaseAdapter<ExchangeResponse.DataBeanX.DataBean.ProductBean>(mContext, R.layout.item_item_tab_exchange_layout, product) {
                                     @Override
