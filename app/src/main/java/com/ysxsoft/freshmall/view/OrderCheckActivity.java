@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.ysxsoft.freshmall.adapter.OrderCheckAdapter;
 import com.ysxsoft.freshmall.dialog.O2OPayDialog;
 import com.ysxsoft.freshmall.impservice.ImpService;
 import com.ysxsoft.freshmall.modle.CheckMoneyBean;
+import com.ysxsoft.freshmall.modle.CommentResponse;
 import com.ysxsoft.freshmall.modle.CommonBean;
 import com.ysxsoft.freshmall.modle.GetAddressListBean;
 import com.ysxsoft.freshmall.modle.PackageDetailBean;
@@ -31,15 +33,20 @@ import com.ysxsoft.freshmall.modle.ShopAlipayBean;
 import com.ysxsoft.freshmall.modle.WxPayBean;
 import com.ysxsoft.freshmall.utils.BaseActivity;
 import com.ysxsoft.freshmall.utils.CustomDialog;
+import com.ysxsoft.freshmall.utils.JsonUtils;
 import com.ysxsoft.freshmall.utils.NetWork;
 import com.ysxsoft.freshmall.utils.SpUtils;
 import com.ysxsoft.freshmall.utils.alipay.PayResult;
 import com.ysxsoft.freshmall.widget.MyRecyclerView;
 import com.ysxsoft.freshmall.widget.ReceiptDialog;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.text.DecimalFormat;
 import java.util.Map;
 
+import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import rx.Observer;
@@ -66,7 +73,7 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
     private DecimalFormat decimalFormat;
 
 
-    private String fptypes;
+    private String fptypes="0";
     private String dwname;
     private String nsrsbh;
     private String sprphone;
@@ -155,7 +162,6 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
 
     }
 
-
     private void initListener() {
         tv_minus.setOnClickListener(this);
         tv_add.setOnClickListener(this);
@@ -164,7 +170,6 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
         ll_have_address.setOnClickListener(this);
         tvReceipt.setOnClickListener(this);
     }
-
 
     @Override
     public int getLayout() {
@@ -200,10 +205,10 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
                     return;
                 }
 
-                if (TextUtils.isEmpty(sprphone)) {
-                    showToastMessage("发票不能为空");
-                    return;
-                }
+//                if (TextUtils.isEmpty(sprphone)) {
+//                    showToastMessage("发票不能为空");
+//                    return;
+//                }
 
                 final O2OPayDialog dialog = new O2OPayDialog(mContext);
                 LinearLayout ll_alipay = dialog.findViewById(R.id.ll_alipay);
@@ -322,141 +327,254 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
     private void WxChatPay(String s, String json1, String shopCardId) {
         final CustomDialog wxPay = new CustomDialog(mContext, "获取订单中...");
         wxPay.show();
-        if (TextUtils.equals(fptypes, "1")) {
-            NetWork.getService(ImpService.class)
-                    .WxChatPay1(SpUtils.getSp(mContext, "uid"), s, json1, shopCardId, fptypes, sprphone, spryx, fpneir)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<WxPayBean>() {
-                        @Override
-                        public void onCompleted() {
 
-                        }
+        PostFormBuilder post = OkHttpUtils.post()
+                .url(ImpService.SHOP_WX_PAY)
+                .addParams("uid", uid);
 
-                        @Override
-                        public void onError(Throwable e) {
-                            showToastMessage(e.getMessage());
-                        }
-
-                        @Override
-                        public void onNext(WxPayBean wxPayBean) {
-                            if ("0".equals(wxPayBean.getCode())) {
-                                PayReq req = new PayReq();
-                                req.appId = wxPayBean.getData().getAppid();
-                                req.partnerId = wxPayBean.getData().getPartnerid();
-                                req.prepayId = wxPayBean.getData().getPrepayid();
-                                req.nonceStr = wxPayBean.getData().getNoncestr();
-                                req.timeStamp = String.valueOf(wxPayBean.getData().getTimestamp());
-                                req.packageValue = wxPayBean.getData().getPackageX();
-                                req.sign = wxPayBean.getData().getSign();
-                                req.extData = "app data"; // optional
-//                            showToastMessage("正常调起支付");
-                                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                                api.sendReq(req);
-                                wxPay.dismiss();
-                                Intent intentId = new Intent(mContext, WaitFaHouActivity.class);
-                                startActivity(intentId);
-                            }
-                        }
-                    });
-        } else {
-            NetWork.getService(ImpService.class)
-                    .WxChatPay(SpUtils.getSp(mContext, "uid"), s, json1, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<WxPayBean>() {
-                        @Override
-                        public void onCompleted() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            showToastMessage(e.getMessage());
-                        }
-
-                        @Override
-                        public void onNext(WxPayBean wxPayBean) {
-                            if ("0".equals(wxPayBean.getCode())) {
-                                PayReq req = new PayReq();
-                                req.appId = wxPayBean.getData().getAppid();
-                                req.partnerId = wxPayBean.getData().getPartnerid();
-                                req.prepayId = wxPayBean.getData().getPrepayid();
-                                req.nonceStr = wxPayBean.getData().getNoncestr();
-                                req.timeStamp = String.valueOf(wxPayBean.getData().getTimestamp());
-                                req.packageValue = wxPayBean.getData().getPackageX();
-                                req.sign = wxPayBean.getData().getSign();
-                                req.extData = "app data"; // optional
-//                            showToastMessage("正常调起支付");
-                                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                                api.sendReq(req);
-                                wxPay.dismiss();
-                                Intent intentId = new Intent(mContext, WaitFaHouActivity.class);
-                                startActivity(intentId);
-                            }
-                        }
-                    });
+        switch (fptypes) {
+            case "0":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json1);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                break;
+            case "1":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json1);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                post.addParams("sprphone",sprphone);
+                post.addParams("spryx",spryx);
+                post.addParams("fpneir",fpneir);
+                break;
+            case "2":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json1);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                post.addParams("dwname",dwname);
+                post.addParams("nsrsbh",nsrsbh);
+                post.addParams("sprphone",sprphone);
+                post.addParams("spryx",spryx);
+                post.addParams("fpneir",fpneir);
+                break;
         }
+        post.tag(this)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("tag","微信==="+e.getMessage().toString());
+                    }
 
+                    @Override
+                    public void onResponse(String response, int id) {
+                        WxPayBean wxPayBean = JsonUtils.parseByGson(response, WxPayBean.class);
+                        if (wxPayBean!=null){
+                            if ("0".equals(wxPayBean.getCode())) {
+                                PayReq req = new PayReq();
+                                req.appId = wxPayBean.getData().getAppid();
+                                req.partnerId = wxPayBean.getData().getPartnerid();
+                                req.prepayId = wxPayBean.getData().getPrepayid();
+                                req.nonceStr = wxPayBean.getData().getNoncestr();
+                                req.timeStamp = String.valueOf(wxPayBean.getData().getTimestamp());
+                                req.packageValue = wxPayBean.getData().getPackageX();
+                                req.sign = wxPayBean.getData().getSign();
+                                req.extData = "app data"; // optional
+//                            showToastMessage("正常调起支付");
+                                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                                api.sendReq(req);
+                                wxPay.dismiss();
+                                Intent intentId = new Intent(mContext, WaitFaHouActivity.class);
+                                startActivity(intentId);
+                            }
+                        }
+
+                    }
+                });
+//        if (TextUtils.equals(fptypes, "1")) {
+//            NetWork.getService(ImpService.class)
+//                    .WxChatPay1(SpUtils.getSp(mContext, "uid"), s, json1, shopCardId, fptypes, sprphone, spryx, fpneir)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<WxPayBean>() {
+//                        @Override
+//                        public void onCompleted() {
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            showToastMessage(e.getMessage());
+//                        }
+//
+//                        @Override
+//                        public void onNext(WxPayBean wxPayBean) {
+//                            if ("0".equals(wxPayBean.getCode())) {
+//                                PayReq req = new PayReq();
+//                                req.appId = wxPayBean.getData().getAppid();
+//                                req.partnerId = wxPayBean.getData().getPartnerid();
+//                                req.prepayId = wxPayBean.getData().getPrepayid();
+//                                req.nonceStr = wxPayBean.getData().getNoncestr();
+//                                req.timeStamp = String.valueOf(wxPayBean.getData().getTimestamp());
+//                                req.packageValue = wxPayBean.getData().getPackageX();
+//                                req.sign = wxPayBean.getData().getSign();
+//                                req.extData = "app data"; // optional
+////                            showToastMessage("正常调起支付");
+//                                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+//                                api.sendReq(req);
+//                                wxPay.dismiss();
+//                                Intent intentId = new Intent(mContext, WaitFaHouActivity.class);
+//                                startActivity(intentId);
+//                            }
+//                        }
+//                    });
+//        } else {
+//            NetWork.getService(ImpService.class)
+//                    .WxChatPay(SpUtils.getSp(mContext, "uid"), s, json1, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<WxPayBean>() {
+//                        @Override
+//                        public void onCompleted() {
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            showToastMessage(e.getMessage());
+//                        }
+//
+//                        @Override
+//                        public void onNext(WxPayBean wxPayBean) {
+//                            if ("0".equals(wxPayBean.getCode())) {
+//                                PayReq req = new PayReq();
+//                                req.appId = wxPayBean.getData().getAppid();
+//                                req.partnerId = wxPayBean.getData().getPartnerid();
+//                                req.prepayId = wxPayBean.getData().getPrepayid();
+//                                req.nonceStr = wxPayBean.getData().getNoncestr();
+//                                req.timeStamp = String.valueOf(wxPayBean.getData().getTimestamp());
+//                                req.packageValue = wxPayBean.getData().getPackageX();
+//                                req.sign = wxPayBean.getData().getSign();
+//                                req.extData = "app data"; // optional
+////                            showToastMessage("正常调起支付");
+//                                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+//                                api.sendReq(req);
+//                                wxPay.dismiss();
+//                                Intent intentId = new Intent(mContext, WaitFaHouActivity.class);
+//                                startActivity(intentId);
+//                            }
+//                        }
+//                    });
+//        }
     }
 
     private void PayData(String addressId, String json, String shopCardId) {
-        if (TextUtils.equals(fptypes, "1")) {
-            NetWork.getService(ImpService.class)
-                    .BalanceData1(SpUtils.getSp(mContext, "uid"), addressId, json, shopCardId, fptypes, sprphone, spryx, fpneir)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<CommonBean>() {
-                        private CommonBean commonBean;
-
-                        @Override
-                        public void onCompleted() {
-                            showToastMessage(commonBean.getMsg());
-                            if (commonBean.getCode() == 0) {
-                                finish();
-                            }
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onNext(CommonBean commonBean) {
-
-                            this.commonBean = commonBean;
-                        }
-                    });
-        } else {
-
-            NetWork.getService(ImpService.class)
-                    .BalanceData(SpUtils.getSp(mContext, "uid"), addressId, json, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<CommonBean>() {
-                        private CommonBean commonBean;
-
-                        @Override
-                        public void onCompleted() {
-                            showToastMessage(commonBean.getMsg());
-                            if (commonBean.getCode() == 0) {
-                                finish();
-                            }
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onNext(CommonBean commonBean) {
-
-                            this.commonBean = commonBean;
-                        }
-                    });
+        PostFormBuilder post = OkHttpUtils.post()
+                .url(ImpService.SHOP_YUE_PAY)
+                .addParams("uid", uid);
+        switch (fptypes) {
+            case "0":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                break;
+            case "1":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                post.addParams("sprphone",sprphone);
+                post.addParams("spryx",spryx);
+                post.addParams("fpneir",fpneir);
+                break;
+            case "2":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                post.addParams("dwname",dwname);
+                post.addParams("nsrsbh",nsrsbh);
+                post.addParams("sprphone",sprphone);
+                post.addParams("spryx",spryx);
+                post.addParams("fpneir",fpneir);
+                break;
         }
+        post.tag(this)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("tag","余额==="+e.getMessage().toString());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        CommonBean resp = JsonUtils.parseByGson(response, CommonBean.class);
+                        if (resp!=null){
+                            if (resp.getCode() == 0) {
+                                finish();
+                            }
+                        }
+                    }
+                });
+//        if (TextUtils.equals(fptypes, "1")) {
+//            NetWork.getService(ImpService.class)
+//                    .BalanceData1(SpUtils.getSp(mContext, "uid"), addressId, json, shopCardId, fptypes, sprphone, spryx, fpneir)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<CommonBean>() {
+//                        private CommonBean commonBean;
+//
+//                        @Override
+//                        public void onCompleted() {
+//                            showToastMessage(commonBean.getMsg());
+//                            if (commonBean.getCode() == 0) {
+//                                finish();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onNext(CommonBean commonBean) {
+//
+//                            this.commonBean = commonBean;
+//                        }
+//                    });
+//        } else {
+//            NetWork.getService(ImpService.class)
+//                    .BalanceData(SpUtils.getSp(mContext, "uid"), addressId, json, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<CommonBean>() {
+//                        private CommonBean commonBean;
+//
+//                        @Override
+//                        public void onCompleted() {
+//                            showToastMessage(commonBean.getMsg());
+//                            if (commonBean.getCode() == 0) {
+//                                finish();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onNext(CommonBean commonBean) {
+//
+//                            this.commonBean = commonBean;
+//                        }
+//                    });
+//        }
 
     }
     /*********************************支付宝支付***************************************/
@@ -477,58 +595,109 @@ public class OrderCheckActivity extends BaseActivity implements View.OnClickList
         if (sectionId.length() != 0) {
             shopCardId = sectionId.deleteCharAt(sectionId.length() - 1).toString();
         }
-        if (TextUtils.equals(fptypes, "1")) {
-            NetWork.getService(ImpService.class)
-                    .ShopAlipay1(uid, String.valueOf(addressId), json, shopCardId, fptypes,  sprphone, spryx, fpneir)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ShopAlipayBean>() {
-                        private ShopAlipayBean shopAlipayBean;
+        PostFormBuilder post = OkHttpUtils.post()
+                .url(ImpService.SHOP_ALI_PAY)
+                .addParams("uid", uid);
 
-                        @Override
-                        public void onCompleted() {
-                            if (shopAlipayBean.getCode() == 0) {
-                                AliPay(shopAlipayBean.getData());
-                            }
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-//                        showToastMessage(e.getMessage());
-                        }
-
-                        @Override
-                        public void onNext(ShopAlipayBean shopAlipayBean) {
-                            this.shopAlipayBean = shopAlipayBean;
-                        }
-                    });
-
-        } else {
-            NetWork.getService(ImpService.class)
-                    .ShopAlipay(uid, String.valueOf(addressId), json, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ShopAlipayBean>() {
-                        private ShopAlipayBean shopAlipayBean;
-
-                        @Override
-                        public void onCompleted() {
-                            if (shopAlipayBean.getCode() == 0) {
-                                AliPay(shopAlipayBean.getData());
-                            }
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-//                        showToastMessage(e.getMessage());
-                        }
-
-                        @Override
-                        public void onNext(ShopAlipayBean shopAlipayBean) {
-                            this.shopAlipayBean = shopAlipayBean;
-                        }
-                    });
+        switch (fptypes) {
+            case "0":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                break;
+            case "1":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                post.addParams("sprphone",sprphone);
+                post.addParams("spryx",spryx);
+                post.addParams("fpneir",fpneir);
+                break;
+            case "2":
+                post.addParams("aid",String.valueOf(addressId));
+                post.addParams("goods",json);
+                post.addParams("shopcar",shopCardId);
+                post.addParams("fptypes",fptypes);
+                post.addParams("dwname",dwname);
+                post.addParams("nsrsbh",nsrsbh);
+                post.addParams("sprphone",sprphone);
+                post.addParams("spryx",spryx);
+                post.addParams("fpneir",fpneir);
+                break;
         }
+        post.tag(this)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("tag","支付宝==="+e.getMessage().toString());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        ShopAlipayBean bean = JsonUtils.parseByGson(response, ShopAlipayBean.class);
+                        if (bean!=null){
+                            if (bean.getCode() == 0) {
+                                AliPay(bean.getData());
+                            }
+                        }
+                    }
+                });
+
+//        if (TextUtils.equals(fptypes, "1")) {
+//            NetWork.getService(ImpService.class)
+//                    .ShopAlipay1(this.uid, String.valueOf(addressId), json, shopCardId, fptypes, sprphone, spryx, fpneir)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<ShopAlipayBean>() {
+//                        private ShopAlipayBean shopAlipayBean;
+//
+//                        @Override
+//                        public void onCompleted() {
+//                            if (shopAlipayBean.getCode() == 0) {
+//                                AliPay(shopAlipayBean.getData());
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+////                        showToastMessage(e.getMessage());
+//                        }
+//
+//                        @Override
+//                        public void onNext(ShopAlipayBean shopAlipayBean) {
+//                            this.shopAlipayBean = shopAlipayBean;
+//                        }
+//                    });
+//
+//        } else {
+//            NetWork.getService(ImpService.class)
+//                    .ShopAlipay(this.uid, String.valueOf(addressId), json, shopCardId, fptypes, dwname, nsrsbh, sprphone, spryx, fpneir)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<ShopAlipayBean>() {
+//                        private ShopAlipayBean shopAlipayBean;
+//
+//                        @Override
+//                        public void onCompleted() {
+//                            if (shopAlipayBean.getCode() == 0) {
+//                                AliPay(shopAlipayBean.getData());
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+////                        showToastMessage(e.getMessage());
+//                        }
+//
+//                        @Override
+//                        public void onNext(ShopAlipayBean shopAlipayBean) {
+//                            this.shopAlipayBean = shopAlipayBean;
+//                        }
+//                    });
+//        }
     }
 
     private static final int SDK_PAY_FLAG = 1;
