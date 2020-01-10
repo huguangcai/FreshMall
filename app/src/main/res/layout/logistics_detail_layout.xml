@@ -24,12 +24,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="物流公司："
-                android:textColor="@color/hint_text_color" />
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_666666" />
 
             <TextView
                 android:id="@+id/tv_logistics_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_333333"
                 android:text="圆通快递" />
 
         </LinearLayout>
@@ -47,13 +50,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="物流电话："
-                android:textColor="@color/hint_text_color" />
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_666666" />
 
             <TextView
                 android:id="@+id/tv_logistics_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="400-123456"
+                android:textSize="@dimen/sp_14"
                 android:textColor="@color/btn_color" />
 
         </LinearLayout>
@@ -77,12 +82,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="运单编号："
-                    android:textColor="@color/hint_text_color" />
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_666666"/>
 
                 <TextView
                     android:id="@+id/tv_logistics_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_333333"
                     android:text="201895566541546" />
 
             </LinearLayout>
@@ -95,10 +103,10 @@
                 android:layout_marginRight="15dp"
                 android:background="@color/gray" />
 
-            <WebView
-                android:id="@+id/web_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/recyclerView"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"/>
 
         </LinearLayout>
 

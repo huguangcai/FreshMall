@@ -218,7 +218,9 @@ public class WaitEvaluateActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fl_arrow:
-                startActivity(LogisticsDetailActivity.class);
+                Intent intent2 = new Intent(mContext, LogisticsDetailActivity.class);
+                intent2.putExtra("orderId",orderId);
+                startActivity(intent2);
                 break;
             case R.id.tv_apply:
                 Intent intent = new Intent(mContext, AllOrderActivity.class);
@@ -226,7 +228,9 @@ public class WaitEvaluateActivity extends BaseActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.tv_look_logistics:
-                startActivity(LogisticsDetailActivity.class);
+                Intent intent3 = new Intent(mContext, LogisticsDetailActivity.class);
+                intent3.putExtra("orderId",orderId);
+                startActivity(intent3);
                 break;
             case R.id.tv_evaluate:
 //                startActivity(EvaluateActivity.class);

@@ -1,5 +1,6 @@
 package com.ysxsoft.freshmall.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,6 +52,8 @@ public class ExchangeCompleteDetailActivity extends BaseActivity {
     private TextView tv_no_address;
     private int addressId;
     private String oid;
+    private int ordId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +82,7 @@ public class ExchangeCompleteDetailActivity extends BaseActivity {
                         if (resp != null) {
                             if (resp.getCode() == 200) {
                                 ExchangeResponse.DataBeanX.DataBean dataBean = resp.getData().getData().get(0);
-
+                                ordId = dataBean.getId();
                                 tvOrder.setText("订单编号："+dataBean.getDdsh());
                                 tvTime.setText("兑换时间："+ AppUtil.FormarTime(AppUtil.AppTime.All, Long.valueOf(dataBean.getDhtime())));
                                 tvNum.setText("快递编号： "+dataBean.getKddhs());
@@ -192,7 +195,9 @@ public class ExchangeCompleteDetailActivity extends BaseActivity {
         cL1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(LogisticsDetailActivity.class);
+                Intent intent = new Intent(mContext, LogisticsDetailActivity.class);
+                intent.putExtra("orderId",oid);
+                startActivity(intent);
             }
         });
         tv_no_address.setOnClickListener(new View.OnClickListener() {

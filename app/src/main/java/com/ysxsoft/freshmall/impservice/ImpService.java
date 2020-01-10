@@ -609,6 +609,10 @@ public interface ImpService {
     public final String GET_TIME = NetWork.BaseUrl + "gwq/schedule";
     //订单提醒发货
     public final String TIPS_FAHUO = NetWork.BaseUrl + "gwq/upload_time";
+    //查看物流
+    public final String WU_LIU = NetWork.BaseUrl + "gwq/query";
+    //查看物流电话
+    public final String WU_LIU_PHONE = NetWork.BaseUrl + "gwq/phone";
 
 
 }

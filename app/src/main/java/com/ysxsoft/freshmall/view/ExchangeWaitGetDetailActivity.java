@@ -1,5 +1,6 @@
 package com.ysxsoft.freshmall.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -211,13 +212,17 @@ public class ExchangeWaitGetDetailActivity extends BaseActivity {
         cL1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(LogisticsDetailActivity.class);
+                Intent intent = new Intent(mContext, LogisticsDetailActivity.class);
+                intent.putExtra("orderId",oid);
+                startActivity(intent);
             }
         });
         tvLook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(LogisticsDetailActivity.class);
+                Intent intent = new Intent(mContext, LogisticsDetailActivity.class);
+                intent.putExtra("orderId",oid);
+                startActivity(intent);
             }
         });
 

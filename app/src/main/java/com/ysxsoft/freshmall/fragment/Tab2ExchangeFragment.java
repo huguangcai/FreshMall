@@ -1,5 +1,6 @@
 package com.ysxsoft.freshmall.fragment;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -71,7 +72,9 @@ public class Tab2ExchangeFragment extends BaseFragment implements SwipeRefreshLa
 
             @Override
             public void onLook(String id) {
-                startActivity(LogisticsDetailActivity.class);
+                Intent intent2 = new Intent(getActivity(), LogisticsDetailActivity.class);
+                intent2.putExtra("orderId",id);
+                startActivity(intent2);
             }
         });
 

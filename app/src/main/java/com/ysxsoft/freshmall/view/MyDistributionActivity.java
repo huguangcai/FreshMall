@@ -45,7 +45,7 @@ public class MyDistributionActivity extends BaseActivity implements SwipeRefresh
         super.onCreate(savedInstanceState);
         uid = SpUtils.getSp(mContext, "uid");
         setBackVisibily();
-        setTitle("我的分销");
+        setTitle("分享有礼");
 //        DistributionHeadView
         initView();
     }

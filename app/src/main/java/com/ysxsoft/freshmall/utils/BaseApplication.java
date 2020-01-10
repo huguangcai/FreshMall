@@ -27,14 +27,15 @@ public class BaseApplication extends Application {
          * 设备类型  UMConfigure.DEVICE_TYPE_PHONE
          * s2 : Push推送业务的secret
          */
-        UMConfigure.init(this, "5c417c9af1f55683a20015ae", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
+//        UMConfigure.init(this, "5c417c9af1f55683a20015ae", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
+        UMConfigure.init(this, "5e17d470cb23d2e4640004fe", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
     }
 
     {
-//        PlatformConfig.setWeixin("wxc523eebce9e041f3", "3baf1193c85774b3fd9d18447d76cab0");
-        PlatformConfig.setWeixin("wxc523eebce9e041f3", "01fbabed46e4635ec9f6de8090d8c7d6");//s:  appId   s1: AppSecret
-//        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-        PlatformConfig.setQQZone("101541625", "e0dff3680171cef4cd0a5776f169fd29");//qq 的s:APP ID   s1：APP Key
+//        PlatformConfig.setWeixin("wxc523eebce9e041f3", "01fbabed46e4635ec9f6de8090d8c7d6");//s:  appId   s1: AppSecret
+        PlatformConfig.setWeixin("wx4e6f9ac9432f741d", "01fbabed46e4635ec9f6de8090d8c7d6");//s:  appId   s1: AppSecret
+//        PlatformConfig.setQQZone("101541625", "e0dff3680171cef4cd0a5776f169fd29");//qq 的s:APP ID   s1：APP Key
+        PlatformConfig.setQQZone("1109140159", "xCYe0zhnDMonNPy4");//qq 的s:APP ID   s1：APP Key
     }
 
     @Override
