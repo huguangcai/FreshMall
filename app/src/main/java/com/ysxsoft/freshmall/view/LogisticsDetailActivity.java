@@ -50,7 +50,7 @@ public class LogisticsDetailActivity extends BaseActivity {
     private void requestData() {
         OkHttpUtils.post()
                 .url(ImpService.WU_LIU)
-                .addParams("oid", "3")
+                .addParams("oid", orderId)
                 .tag(this)
                 .build()
                 .execute(new StringCallback() {

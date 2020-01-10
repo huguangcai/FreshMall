@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
@@ -33,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
                 android:textColor="@color/color_333333"
-                android:text="圆通快递" />
+                tools:text="圆通快递" />
 
         </LinearLayout>
 
@@ -57,7 +58,7 @@
                 android:id="@+id/tv_logistics_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="400-123456"
+                tools:text="400-123456"
                 android:textSize="@dimen/sp_14"
                 android:textColor="@color/btn_color" />
 
@@ -91,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/color_333333"
-                    android:text="201895566541546" />
+                    tools:text="201895566541546" />
 
             </LinearLayout>
 

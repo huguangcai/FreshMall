@@ -103,7 +103,7 @@
                         android:drawableTop="@mipmap/img_distribution"
                         android:drawablePadding="5dp"
                         android:gravity="center"
-                        android:text="我的分销"
+                        android:text="分享有礼"
                         android:textColor="@color/color_282828"
                         android:textSize="13sp" />
 
