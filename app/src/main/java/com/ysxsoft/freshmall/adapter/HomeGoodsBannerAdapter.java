@@ -40,7 +40,8 @@ public class HomeGoodsBannerAdapter extends RecyclerView.Adapter<HomeGoodsBanner
             myViewHolder.img_tupian.setVisibility(View.GONE);
             myViewHolder.tv_content.setVisibility(View.GONE);
         } else if (i == 9) {
-            myViewHolder.img_tupian.setBackgroundResource(R.mipmap.img_more);
+//            myViewHolder.img_tupian.setBackgroundResource(R.mipmap.img_more);
+            ImageLoadUtil.GlideGoodsImageLoad(context, data.get(i).getTypepic(), myViewHolder.img_tupian);
             myViewHolder.tv_content.setText("更多");
         } else {
             myViewHolder.tv_content.setText(data.get(i).getTypename());

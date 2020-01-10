@@ -613,6 +613,12 @@ public interface ImpService {
     public final String WU_LIU = NetWork.BaseUrl + "gwq/query";
     //查看物流电话
     public final String WU_LIU_PHONE = NetWork.BaseUrl + "gwq/phone";
+    //支付宝下单
+    public final String SHOP_ALI_PAY = NetWork.BaseUrl + "pays/ShopAlipay";
+    //微信下单
+    public final String SHOP_WX_PAY = NetWork.BaseUrl + "pays/ShopWxpay";
+    //余额下单
+    public final String SHOP_YUE_PAY = NetWork.BaseUrl + "pays/ShopYuepay";
 
 
 }
