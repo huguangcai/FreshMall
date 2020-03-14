@@ -75,6 +75,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     private ArrayList<PackageDetailBean.DetailData> detailBeans = new ArrayList<>();
     private CountDownTimer timer;
     private String phoneNumber;
+    int type=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,6 +329,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 AppUtil.callPhone(mContext, phoneNumber);
                 break;
             case R.id.tv_join_shop_card:
+                type=0;
                 if ("seckill".equals(seckill)) {
                     if (data.getMsmsg().getStates() != null) {
                         if ("1".equals(data.getMsmsg().getStates())) {
@@ -353,6 +355,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 addShopCar();
                 break;
             case R.id.tv_buy:
+                type=1;
                 if ("seckill".equals(seckill)) {
                     if (data.getMsmsg().getStates() != null) {
                         if ("1".equals(data.getMsmsg().getStates())) {
@@ -449,9 +452,11 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 detailData.setPrice(tv_current_price.getText().toString());
                 detailBeans.add(detailData);
                 detailBean.setDataList(detailBeans);
-                Intent intentId = new Intent(mContext, OrderCheckActivity.class);
-                intentId.putExtra("goods", detailBean);
-                startActivity(intentId);
+                if (type==1){
+                    Intent intentId = new Intent(mContext, OrderCheckActivity.class);
+                    intentId.putExtra("goods", detailBean);
+                    startActivity(intentId);
+                }
             }
         });
         ImageLoadUtil.GlideGoodsImageLoad(mContext, data.getPic(), img_tupian);
