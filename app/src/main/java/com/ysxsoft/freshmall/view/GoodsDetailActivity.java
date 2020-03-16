@@ -345,13 +345,49 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 }
 
                 if (TextUtils.isEmpty(tv_goods_specifications.getText().toString())) {
-                    showToastMessage("商品规格不能为空");
+                    final GoodsDetailDialog detailDialog = new GoodsDetailDialog(mContext);
+                    ImageView img_tupian = detailDialog.findViewById(R.id.img_tupian);
+                    TextView tv_cur_price = detailDialog.findViewById(R.id.tv_current_price);
+                    TextView tv_old_price = detailDialog.findViewById(R.id.tv_old_price);
+                    final TextView tv_color = detailDialog.findViewById(R.id.tv_color);
+                    TextView tv_size = detailDialog.findViewById(R.id.tv_size);
+                    tv_size.setVisibility(View.GONE);
+                    TextView tv_guige = detailDialog.findViewById(R.id.tv_guige);
+                    TextView tv_submit = detailDialog.findViewById(R.id.tv_submit);
+                    RecyclerView rv_guige = detailDialog.findViewById(R.id.rv_guige);
+                    GridLayoutManager manager = new GridLayoutManager(mContext, 4);
+                    final DetailItemAdapter adapter = new DetailItemAdapter(mContext, data.getGuige());
+                    adapter.setOnclickListener(new OnItemClickListener() {
+                        @Override
+                        public void onClick(int position) {
+                            adapter.setSelect(position);
+                            tv_color.setText(data.getGuige().get(position));
+                        }
+                    });
+                    rv_guige.setLayoutManager(manager);
+                    rv_guige.setAdapter(adapter);
+                    tv_goods_num = detailDialog.findViewById(R.id.tv_num);
+
+                    tv_submit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            tv_goods_specifications.setText(tv_color.getText().toString());
+                            detailDialog.dismiss();
+                            addShopCar();
+                        }
+                    });
+                    ImageLoadUtil.GlideGoodsImageLoad(mContext, data.getPic(), img_tupian);
+                    tv_cur_price.setText(data.getVipjiage());
+                    tv_old_price.setText("¥" + data.getJiage());
+                    tv_guige.setText(data.getGuigename());
+                    tv_color.setText(data.getGuige().get(0));
+                    detailDialog.show();
                     return;
                 }
-                if (TextUtils.isEmpty(tv_goods_num.getText().toString())) {
-                    showToastMessage("商品数量不能为空");
-                    return;
-                }
+//                if (TextUtils.isEmpty(tv_goods_num.getText().toString())) {
+//                    showToastMessage("商品数量不能为空");
+//                    return;
+//                }
                 addShopCar();
                 break;
             case R.id.tv_buy:
